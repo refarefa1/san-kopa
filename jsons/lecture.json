@@ -1,0 +1,13 @@
+{
+    "lectureId": "",
+    "lecturerId": "",
+    "isActive": "",
+    "appointments": [
+        {
+            "id": "",
+            "organizationId": "",
+            "date": "",
+            "isDue": ""
+        }
+    ]
+}
