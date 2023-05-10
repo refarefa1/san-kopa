@@ -1,13 +1,18 @@
 {
-    "lectureId": "",
+    "id": "",
     "lecturerId": "",
     "isActive": "",
-    "appointments": [
-        {
-            "id": "",
-            "organizationId": "",
-            "date": "",
-            "isDue": ""
-        }
-    ]
+    "type": "",
+    "name": "",
+    "field": "",
+    "about": "",
+    "format": "",
+    "videoUrl": "",
+    "thumbnail": "",
+    "lectureLength": "",
+    "extraProps": "",
+    "area": "",
+    "maxCapacity": 12,
+    "compensation": 0,
+    "appointmentIds": []
 }
