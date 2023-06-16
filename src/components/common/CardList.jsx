@@ -19,6 +19,7 @@ const styles = {
         border: '1px solid #D3D3D3',
         borderRadius: '10px',
         overflow: 'hidden',
+        flexWrap: 'unset ',
         my: 2
     },
     imageContainer: {
@@ -31,9 +32,9 @@ const styles = {
         objectFit: 'cover',
     },
     info: {
-        paddingY: 1,
-        display: 'flex',
+        p: 1.5,
         flexDirection: 'column',
+        width: '100%'
     }
 }
 
@@ -100,12 +101,12 @@ export const CardList = () => {
         <Paper sx={styles.container}>
             {lectures.map(lecture =>
                 <Grid key={lecture._id} container spacing={0} sx={styles.card} >
-                    <Grid xs={4} item style={{ padding: 0 }} >
+                    <Grid item style={{ padding: 0 }} >
                         <ButtonBase sx={styles.imageContainer}>
                             <Img alt="complex" src={lecture.thumbnail} style={styles.image} />
                         </ButtonBase>
                     </Grid>
-                    <Grid item xs={8} sm container sx={styles.info}>
+                    <Grid item sm container sx={styles.info}>
                         <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{lecture.name}</Typography>
                         <Typography variant="h6">{lecture.lecturer.name}</Typography>
                         <Box sx={{ mt: 'auto' }}>
