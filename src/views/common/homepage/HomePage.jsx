@@ -1,29 +1,80 @@
-import { Link } from "react-router-dom"
+import { Tab, Box, Container } from "@mui/material";
+import Typography from '@mui/material/Typography';
+import Tabs from '@mui/material/Tabs';
+import { Filter } from "../../../components/common/Filter";
+import { useState } from "react";
+import { CardList } from "../../../components/common/CardList";
+
+const sizes = {
+    screenWidth: '100%'
+}
 
 const LecturePage = () => {
     return (
-        <section className="lecture-page-container">
-            <h1>Lecture page</h1>
-        </section>
-    )
-}
+        <Container sx={{ width: sizes.screenWidth, padding: 0, margin: 0 }}>
+            <Filter />
+            <CardList />
+        </Container>
+    );
+};
+
 
 const InstructorPage = () => {
     return (
-        <section className="instructor-page-container">
-            <h1>Instructor page</h1>
-        </section>
-    )
-}
+        <Box>
+            <Typography variant="h2">aa</Typography>
+        </Box>
+    );
+};
+
+const TabPanel = (props) => {
+    const { children, value, index, ...other } = props;
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{ p: 0 }}>
+                    {children}
+                </Box>
+            )}
+        </div>
+    );
+};
+
+const a11yProps = (index) => {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+};
 
 export const HomePage = () => {
+
+    const [component, setComponent] = useState(0);
+
+    const handleComponentChange = (event, newComponent) => {
+        setComponent(newComponent);
+    };
+
     return (
-        <section className="home-page-container">
-            <h1>Home page</h1>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
-            <LecturePage />
-            <InstructorPage />
-        </section>
-    )
-}
+        <Container>
+            <Box sx={{ my: '12px' }}>
+                <Tabs value={component} onChange={handleComponentChange}>
+                    <Tab label="הרצאות" {...a11yProps(0)} />
+                    <Tab label="מרצים" {...a11yProps(1)} />
+                </Tabs>
+            </Box>
+            <TabPanel value={component} index={0}>
+                <LecturePage />
+            </TabPanel>
+            <TabPanel value={component} index={1}>
+                <InstructorPage />
+            </TabPanel>
+        </Container>
+    );
+};

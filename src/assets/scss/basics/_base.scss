@@ -1,11 +1,12 @@
 * {
     box-sizing: border-box;
     font-family: 'Noto Sans Hebrew', sans-serif;
+    direction: rtl !important;
+    line-height: 1 !important;
 }
 
 body {
     margin: 0;
-    line-height: 1;
 }
 
 h1,
@@ -29,4 +30,10 @@ button {
 ul {
     padding: 0;
     list-style-type: none;
+}
+
+.muirtl-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input {
+    &:focus {
+        background-color: white !important;
+    }
 }
