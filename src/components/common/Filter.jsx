@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { Box, Stack, Autocomplete, TextField, Checkbox } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -48,6 +48,10 @@ const LocationSelect = (props) => {
     const { locations, selectedLocations, onLocationSelect } = props
     const [isOpen, setIsOpen] = useState(false);
 
+    const handleToggleOpen = () => {
+        setIsOpen((prevIsOpen) => !prevIsOpen);
+    };
+
     const renderLocationOption = (props, option, { selected }) => (
         <li {...props}>
             <Checkbox
@@ -77,10 +81,6 @@ const LocationSelect = (props) => {
             />
         </Box>
     );
-
-    const handleToggleOpen = () => {
-        setIsOpen((prevIsOpen) => !prevIsOpen);
-    };
 
     return (
         <Box sx={styles.locationSelectContainer}>
@@ -132,7 +132,6 @@ const TopicSelect = (props) => {
                 renderInput={renderAutocompleteInput}
             />
         </Stack>
-
     )
 }
 

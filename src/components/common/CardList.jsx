@@ -23,8 +23,9 @@ const styles = {
         my: 2
     },
     imageContainer: {
-        width: 112,
-        height: 112,
+        height: '100%',
+        width: '100%',
+        aspectRatio: '1 / 1',
     },
     image: {
         width: '100%',
@@ -32,7 +33,8 @@ const styles = {
         objectFit: 'cover',
     },
     info: {
-        p: 1.5,
+        px: 1.5,
+        py: 1,
         flexDirection: 'column',
         width: '100%'
     }
@@ -101,14 +103,14 @@ export const CardList = () => {
         <Paper sx={styles.container}>
             {lectures.map(lecture =>
                 <Grid key={lecture._id} container spacing={0} sx={styles.card} >
-                    <Grid item style={{ padding: 0 }} >
+                    <Grid item xs={4} style={{ padding: 0 }} >
                         <ButtonBase sx={styles.imageContainer}>
                             <Img alt="complex" src={lecture.thumbnail} style={styles.image} />
                         </ButtonBase>
                     </Grid>
-                    <Grid item sm container sx={styles.info}>
-                        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{lecture.name}</Typography>
-                        <Typography variant="h6">{lecture.lecturer.name}</Typography>
+                    <Grid item xs={8} sm container sx={styles.info}>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{lecture.name}</Typography>
+                        <Typography>{lecture.lecturer.name}</Typography>
                         <Box sx={{ mt: 'auto' }}>
                             {lecture.fields.map((field, idx) =>
                                 <Chip sx={{ mr: '12px' }} size="small" key={idx} label={field} />

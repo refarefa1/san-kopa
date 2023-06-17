@@ -1,23 +1,35 @@
-import { Tab, Box, Container } from "@mui/material";
-import Typography from '@mui/material/Typography';
-import Tabs from '@mui/material/Tabs';
-import { Filter } from "../../../components/common/Filter";
 import { useState } from "react";
+import { Tab, Box, Container, Typography, Tabs } from "@mui/material";
+import { Filter } from "../../../components/common/Filter";
 import { CardList } from "../../../components/common/CardList";
+import { NavBar } from "../../../components/common/NavBar";
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 
-const sizes = {
-    screenWidth: '100%'
+const styles = {
+    tab: {
+        fontSize: 18,
+        fontWeight: 700,
+        color: 'black',
+        '&.Mui-selected': {
+            color: 'black'
+        }
+    },
+    tabIndicator: {
+        backgroundColor: 'black'
+    }
 }
 
 const LecturePage = () => {
     return (
-        <Container sx={{ width: sizes.screenWidth, padding: 0, margin: 0 }}>
+        <Container sx={{ padding: 0, margin: 0 }}>
             <Filter />
             <CardList />
         </Container>
     );
 };
-
 
 const InstructorPage = () => {
     return (
@@ -27,54 +39,35 @@ const InstructorPage = () => {
     );
 };
 
-const TabPanel = (props) => {
-    const { children, value, index, ...other } = props;
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box sx={{ p: 0 }}>
-                    {children}
-                </Box>
-            )}
-        </div>
-    );
-};
-
-const a11yProps = (index) => {
-    return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-    };
-};
-
 export const HomePage = () => {
 
     const [component, setComponent] = useState(0);
+
+    const navbarItems = [
+        { label: 'בית', icon: <HomeOutlinedIcon /> },
+        { label: 'הרצאות', icon: <FormatListBulletedOutlinedIcon /> },
+        { label: 'מפגשים', icon: <CalendarMonthOutlinedIcon /> },
+        { label: 'הודעות', icon: <ChatBubbleOutlineOutlinedIcon /> }
+    ]
 
     const handleComponentChange = (event, newComponent) => {
         setComponent(newComponent);
     };
 
+    const componentToRender = component === 0 ? <LecturePage /> : <InstructorPage />
+
     return (
         <Container>
-            <Box sx={{ my: '12px' }}>
-                <Tabs value={component} onChange={handleComponentChange}>
-                    <Tab label="הרצאות" {...a11yProps(0)} />
-                    <Tab label="מרצים" {...a11yProps(1)} />
+            <Box sx={{ my: 2 }}>
+                <Tabs value={component} onChange={handleComponentChange} TabIndicatorProps={{ style: styles.tabIndicator }}>
+                    <Tab label="הרצאות" sx={styles.tab} />
+                    <Tab label="מרצים" sx={styles.tab} />
                 </Tabs>
             </Box>
-            <TabPanel value={component} index={0}>
-                <LecturePage />
-            </TabPanel>
-            <TabPanel value={component} index={1}>
-                <InstructorPage />
-            </TabPanel>
+            <Box>
+                {componentToRender}
+            </Box>
+            <NavBar items={navbarItems} />
         </Container>
     );
 };
