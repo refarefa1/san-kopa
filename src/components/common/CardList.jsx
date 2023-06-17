@@ -1,42 +1,12 @@
-import { Box, ButtonBase, Chip, Grid, Paper, Typography } from "@mui/material"
-import styled from "@emotion/styled";
-
-const Img = styled('img')({
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
-});
+import { Box, ButtonBase, Chip, Grid, List, Paper, Typography } from "@mui/material"
+import { CardItem } from "./CardItem"
 
 const styles = {
-    container: {
-        margin: 'auto',
+    list: {
         maxWidth: 500,
+        p: 0,
         flexGrow: 1,
         boxShadow: 'none'
-    },
-    card: {
-        border: '1px solid #D3D3D3',
-        borderRadius: '10px',
-        overflow: 'hidden',
-        flexWrap: 'unset ',
-        my: 2
-    },
-    imageContainer: {
-        height: '100%',
-        width: '100%',
-        aspectRatio: '1 / 1',
-    },
-    image: {
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-    },
-    info: {
-        px: 1.5,
-        py: 1,
-        flexDirection: 'column',
-        width: '100%'
     }
 }
 
@@ -100,25 +70,8 @@ export const CardList = () => {
     ]
 
     return (
-        <Paper sx={styles.container}>
-            {lectures.map(lecture =>
-                <Grid key={lecture._id} container spacing={0} sx={styles.card} >
-                    <Grid item xs={4} style={{ padding: 0 }} >
-                        <ButtonBase sx={styles.imageContainer}>
-                            <Img alt="complex" src={lecture.thumbnail} style={styles.image} />
-                        </ButtonBase>
-                    </Grid>
-                    <Grid item xs={8} sm container sx={styles.info}>
-                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{lecture.name}</Typography>
-                        <Typography>{lecture.lecturer.name}</Typography>
-                        <Box sx={{ mt: 'auto' }}>
-                            {lecture.fields.map((field, idx) =>
-                                <Chip sx={{ mr: '12px' }} size="small" key={idx} label={field} />
-                            )}
-                        </Box>
-                    </Grid>
-                </Grid>
-            )}
-        </Paper>
+        <List sx={styles.list}>
+            {lectures.map(lecture => <CardItem key={lecture._id} lecture={lecture} />)}
+        </List>
     )
 }

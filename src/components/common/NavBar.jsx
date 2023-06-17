@@ -2,7 +2,7 @@ import { useState } from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { Paper } from '@mui/material';
-import { primaryColor } from './Colors';
+import { primaryColor } from '../../global/Colors';
 
 const styles = {
     navbarContainer: {
@@ -39,7 +39,7 @@ export const NavBar = (props) => {
     }
 
     return (
-        <Paper sx={styles.navbarContainer} >
+        <Paper sx={styles.navbarContainer} elevation={20} >
             <BottomNavigation
                 sx={styles.navbar}
                 showLabels

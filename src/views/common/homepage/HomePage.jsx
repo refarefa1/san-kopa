@@ -19,12 +19,16 @@ const styles = {
     },
     tabIndicator: {
         backgroundColor: 'black'
+    },
+    container: {
+        p: 0,
+        m: 0
     }
 }
 
 const LecturePage = () => {
     return (
-        <Container sx={{ padding: 0, margin: 0 }}>
+        <Container sx={styles.container}>
             <Filter />
             <CardList />
         </Container>
@@ -33,9 +37,10 @@ const LecturePage = () => {
 
 const InstructorPage = () => {
     return (
-        <Box>
-            <Typography variant="h2">aa</Typography>
-        </Box>
+        <Container sx={styles.container}>
+            <Filter />
+            <CardList />
+        </Container>
     );
 };
 
