@@ -151,7 +151,7 @@ export const Filter = () => {
     }
 
     return (
-        <Box sx={{ my: 2 }}>
+        <Box sx={{ mb: 2 }}>
             <TopicSelect topics={topics} selectedTopic={selectedTopic} handleTopicSelect={handleTopicSelect} />
             <LocationSelect locations={locations} selectedLocations={selectedLocations} onLocationSelect={handleLocationSelect} />
         </Box>

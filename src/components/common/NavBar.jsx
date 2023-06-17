@@ -40,15 +40,8 @@ export const NavBar = (props) => {
 
     return (
         <Paper sx={styles.navbarContainer} elevation={20} >
-            <BottomNavigation
-                sx={styles.navbar}
-                showLabels
-                value={value}
-                onChange={setNewValue}
-            >
-                {items.map((item, idx) =>
-                    <BottomNavigationAction sx={styles.item} key={idx} label={item.label} icon={item.icon} />
-                )}
+            <BottomNavigation sx={styles.navbar} showLabels value={value} onChange={setNewValue}>
+                {items.map((item, idx) => <BottomNavigationAction sx={styles.item} key={idx} label={item.label} icon={item.icon} />)}
             </BottomNavigation>
         </Paper>
     );

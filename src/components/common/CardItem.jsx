@@ -24,28 +24,30 @@ const styles = {
     info: {
         px: 1.5,
         py: 1,
+        display: 'flex',
         flexDirection: 'column',
+        alignItems: 'space-between',
         width: '100%'
     }
 }
 
 export const CardItem = (props) => {
 
-    const { lecture } = props
+    const { item } = props
 
     return (
         <ListItem sx={styles.item}>
             <Grid container spacing={0} sx={styles.gridContainer} >
                 <Grid item xs={4} style={{ padding: 0 }} >
                     <ButtonBase sx={styles.imageContainer}>
-                        <CardMedia component="img" alt="complex" src={lecture.thumbnail} style={styles.image} />
+                        <CardMedia component="img" alt="complex" src={item.thumbnail} style={styles.image} />
                     </ButtonBase>
                 </Grid>
-                <Grid item xs={8} sm container sx={styles.info}>
-                    <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{lecture.name}</Typography>
-                    <Typography>{lecture.lecturer.name}</Typography>
+                <Grid item xs={8} sm sx={styles.info}>
+                    <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{item.name}</Typography>
+                    <Typography>{item.lecturer.name}</Typography>
                     <Box sx={{ mt: 'auto' }}>
-                        {lecture.fields.map((field, idx) =>
+                        {item.fields.map((field, idx) =>
                             <Chip sx={{ mr: '12px' }} size="small" key={idx} label={field} />
                         )}
                     </Box>
