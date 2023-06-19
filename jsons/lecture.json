@@ -1,10 +1,13 @@
 {
     "id": "",
-    "lecturerId": "",
+    "lecturer": {
+        "_id": "",
+        "name": ""
+    },
     "isActive": "",
     "type": "",
     "name": "",
-    "field": "",
+    "topics": [],
     "about": "",
     "format": "",
     "videoUrl": "",
