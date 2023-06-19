@@ -14,5 +14,6 @@
     "area": "",
     "maxCapacity": 12,
     "compensation": 0,
+    "timeBlockers": [],
     "appointmentIds": []
 }
