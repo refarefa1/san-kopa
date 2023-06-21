@@ -1,3 +1,4 @@
+import jwt_decode from "jwt-decode";
 import {
   Box,
   Button,
@@ -8,10 +9,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { primaryColor } from "../../../global/Colors";
 
 const styles = {
   textInput: {
@@ -25,7 +25,7 @@ const styles = {
       padding: 1.5,
     },
   },
-  checkboxLinkWrapper: {
+  rememberMePswRecoverWrapper: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
@@ -45,28 +45,66 @@ const styles = {
     gap: 1.5,
     mt: 5,
   },
+  link: {
+    color: "#1725AE",
+    textDecoration: "underline",
+  },
+  googleBtn: {
+    "#google-signin > *": {
+      width: "100%"
+    },
+    width: '100%',
+    marginBlockStart: 40,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 };
 
 const LoginForm = () => {
-  const EmailInput = () => (
-    <TextField
-      id="email"
-      label="אימייל"
-      variant="outlined"
-      type="email"
-      sx={styles.textInput}
-    />
-  );
+  // const [formData, setFormData] = useState();
 
-  const PasswordInput = () => (
-    <TextField
-      id="password"
-      label="סיסמה"
-      variant="outlined"
-      type="password"
-      sx={styles.textInput}
-    />
-  );
+  const handleSubmit = (ev) => {
+    ev.preventDefault()
+  }
+  
+  const EmailInput = () => {
+    const [email, setEmail] = useState("");
+    const handleEmailChange = ({ target }) => {
+      setEmail(target.value);
+    };
+    return (
+      <TextField
+        name="email"
+        label="אימייל"
+        variant="outlined"
+        type="email"
+        autoComplete="email"
+        sx={styles.textInput}
+        onChange={handleEmailChange}
+        value={email}
+      />
+    );
+  };
+
+  const PasswordInput = () => {
+    const [password, setPassword] = useState("");
+
+    const handlePasswordChange = ({ target }) => {
+      setPassword(target.value);
+    };
+    return (
+      <TextField
+        name="password"
+        label="סיסמה"
+        variant="outlined"
+        type="password"
+        sx={styles.textInput}
+        onChange={handlePasswordChange}
+        value={password}
+      />
+    );
+  };
 
   const RememberMeCheckbox = () => {
     const [isRememberMe, setIsRememberMe] = useState(true);
@@ -79,9 +117,10 @@ const LoginForm = () => {
       <FormControlLabel
         control={
           <Checkbox
-            defaultChecked
+            name="rememberMe"
             value={isRememberMe}
             onChange={handleRememberMeToggle}
+            checked={isRememberMe}
           />
         }
         label="זכור אותי"
@@ -90,32 +129,66 @@ const LoginForm = () => {
   };
 
   return (
-    <Box>
+    <form onSubmit={handleSubmit}>
       <EmailInput />
       <PasswordInput />
-      <Box sx={styles.checkboxLinkWrapper}>
+      <Box sx={styles.rememberMePswRecoverWrapper}>
         <RememberMeCheckbox />
-        <Link to="/password-recovery">שכחת סיסמה?</Link>
+        <Link to="/password-recovery" style={styles.link}>
+          שכחת סיסמה?
+        </Link>
       </Box>
-      <Button variant="contained" sx={styles.submitButton}>
+      <Button
+      type="submit"
+        variant="contained"
+        sx={styles.submitButton}
+      >
         התחברות
       </Button>
-    </Box>
+    </form>
   );
 };
 
 export const LoginPage = () => {
+
+  const handleCallbackResponse = (response) => {
+    const userObject = jwt_decode(response.credential);
+    console.log(userObject);
+  };
+
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:
+        "826486200841-iq0u5i8ssr23k4da9j8jct0cdv791brm.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+
+    google.accounts.id.renderButton(document.getElementById("google-signin"), {
+      theme: "outline",
+      width: "100%",
+    });
+  }, []);
+
   return (
-      <Container sx={{ px: 4.5, my: 6.5 }}>
-        <Typography variant="h5" sx={{ textAlign: "center", color: "#6358d8" }}>
-          התחברות לחשבון קיים
+    <Container sx={{ px: 4.5, my: 6.5 }}>
+      <Typography
+        variant="h5"
+        sx={{ textAlign: "center", color: primaryColor }}
+      >
+        התחברות לחשבון קיים
+      </Typography>
+      <div id="google-signin" style={styles.googleBtn}></div>
+      <Divider sx={{ mt: 4, mb: 1.25 }}>או</Divider>
+      <LoginForm />
+      <Box sx={styles.switchToSignupWrapper}>
+        <Typography variant="p" color="text.disabled">
+          עוד אין לך חשבון?
         </Typography>
-        <Divider sx={{ mt: 4, mb: 1.25 }}>או</Divider>
-        <LoginForm />
-        <Box sx={styles.switchToSignupWrapper}>
-          <Typography variant="p">עוד אין לך חשבון?</Typography>
-          <Link to="/signup">ליצירת חשבון</Link>
-        </Box>
-      </Container>
+        <Link to="/signup" style={styles.link}>
+          ליצירת חשבון
+        </Link>
+      </Box>
+    </Container>
   );
 };

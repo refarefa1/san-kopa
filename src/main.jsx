@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import "./assets/scss/main.scss";
@@ -19,10 +18,14 @@ const cacheRtl = createCache({
 const muiTheme = createTheme({
   palette: {
     primary: {
-      main: "#6358d8"
+      main: "#6358d8",
     },
+    text: {
+      disabled: "#727272"
+    }
   },
 });
+
 const createApp = () => {
   return (
     <ThemeProvider theme={muiTheme}>
