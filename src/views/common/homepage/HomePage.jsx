@@ -34,9 +34,7 @@ const LecturePage = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        setTimeout(() => {
-            dispatch(loadLectures())
-        }, 2000)
+        dispatch(loadLectures())
     }, [])
 
     const lectures = useSelector(state => state.lectureModule.lectures)

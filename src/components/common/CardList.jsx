@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { List, Skeleton } from "@mui/material"
+import { List } from "@mui/material"
 import { CardItem } from "./CardItem"
 import { SkeletonItems } from './SkeletonItems'
 
