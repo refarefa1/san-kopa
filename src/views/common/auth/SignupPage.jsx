@@ -1,6 +1,6 @@
 import { InstructorAdd } from '../../../components/instructor/InstructorAdd'
 import { OrganizationAdd } from '../../../components/organization/OrganizationAdd'
-import { Terms } from '../../../components/common/Terms'
+import { Terms } from '../../../components/common/auth/Terms'
 import { Message } from '../../../components/common/Message'
 
 const IdentificationPage = () => {
