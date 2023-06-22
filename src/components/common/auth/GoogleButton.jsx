@@ -2,11 +2,7 @@ import { useEffect, useRef } from "react";
 
 const styles = {
     googleBtn: {
-        width: "100%",
         marginBlockStart: 40,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
       },
 }
 export const GoogleButton = () => {
@@ -22,12 +18,16 @@ export const GoogleButton = () => {
           client_id:
           "826486200841-iq0u5i8ssr23k4da9j8jct0cdv791brm.apps.googleusercontent.com",
           callback: handleCallbackResponse,
+          // ux_mode: "popup",
         });
         
         google.accounts.id.renderButton(googleSigninRef.current, {
           theme: "outline",
           width: "100%",
+          text: "התחברות עם גוגל",
+          locale: "he-IL"
         });
+
       }, []);
   return (
     <div
