@@ -13,7 +13,7 @@ const styles = {
   },
 };
 
-export const AuthCreds = ({ handleChange, type }) => {
+export const AuthCred = ({ handleChange, type }) => {
   return (
       <>
         <Typography variant="h5" sx={{ textAlign: "center", color: primaryColor }}>

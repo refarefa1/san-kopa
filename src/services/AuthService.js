@@ -2,29 +2,25 @@ import { HttpService } from "./HttpService";
 
 const USERS_KEY = "usersDB";
 
-const login = async (creds) => {
+const login = async (userCred) => {
   const users = await HttpService.query(USERS_KEY);
-  const { email, password } = creds;
-  const currUser = users.find((user) => {
-    return email === user.email && password === user.password;
-  });
-  return currUser
-};
-
-const updateUser = async (userId, data) => {
-  const users = await HttpService.query(USERS_KEY);
-  const currUser = users.find((user) => {
-    return userId === user._id
-  });
-  const updatedUser = {...currUser, ...data}
-  return updatedUser
+  const user = users.find((user) => user.email === userCred.email)
+  return {...user, rememberMe: userCred.rememberMe}
 };
 
 const _createUsers = () => {
   const users = [
     {
+      _id: "user101",
       email: "lala@gmail.com",
       password: "lala",
+      rememberMe: true,
+    },
+    {
+      _id: "user102",
+      email: "puki@gmail.com",
+      password: "puki",
+      rememberMe: true,
     },
   ];
   const currUsers = localStorage.getItem(USERS_KEY);
@@ -34,5 +30,4 @@ _createUsers();
 
 export const authService = {
   login,
-  updateUser,
 };

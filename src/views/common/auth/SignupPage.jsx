@@ -5,7 +5,7 @@ import { Message } from "../../../components/common/Message";
 import { OrganizationAdd } from "../../../components/organization/OrganizationAdd";
 import { ProgressBar } from "../../../components/common/ProgressBar";
 import { useState } from "react";
-import { AuthCreds } from "../../../components/common/auth/AuthCreds";
+import { AuthCred } from "../../../components/common/auth/AuthCred";
 import { Identification } from "../../../components/common/auth/Identification";
 
 const InstructorSignup = () => {
@@ -40,7 +40,7 @@ export const SignupPage = () => {
   const getComponentToRender = () => {
     switch (component) {
       case 0:
-        return <AuthCreds type="signup" handleChange={handleChangeSignupPage} />;
+        return <AuthCred type="signup" handleChange={handleChangeSignupPage} />;
       case 1:
         return (
           <Identification
@@ -52,7 +52,7 @@ export const SignupPage = () => {
       case 3:
         return <OrganizationSignup handleChange={handleChangeSignupPage} />;
       default:
-        return <AuthCreds type="signup" handleChange={handleChangeSignupPage} />;
+        return <AuthCred type="signup" handleChange={handleChangeSignupPage} />;
     }
   };
 

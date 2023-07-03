@@ -40,12 +40,12 @@ export const AuthForm = ({handleChange, type }) => {
   const dispatch = useDispatch();
 
   const initialFields = { email: ``, password: ``, rememberMe: true };
-  const [register, setCreds, creds] = useFormRegister(initialFields);
+  const [register, setUserCred, userCred] = useFormRegister(initialFields);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    dispatch(login(creds));
-    handleChange({ data: {}, newComponent: 1 })    
+    dispatch(login(userCred));
+    handleChange({ data: {}, newComponent: 1 }) 
   };
 
   return (

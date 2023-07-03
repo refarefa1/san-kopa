@@ -4,7 +4,6 @@ import LocalFloristOutlinedIcon from "@mui/icons-material/LocalFloristOutlined";
 import { primaryColor } from "../../../global/Colors";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../../../store/actions/AuthActions";
 
 const styles = {
   p: {
@@ -36,12 +35,12 @@ const styles = {
 };
 
 export const Identification = ({ handleChange }) => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const currUser = useSelector((state) => state.authModule.loggedInUser);
   const [userType, setUserType] = useState();
 
   const handleClick = () => {
-    dispatch(updateUser(currUser._Id, {userType: userType}))
+    //dispatch
     handleChange({ data: {}, newComponent: 2 });
   };
 

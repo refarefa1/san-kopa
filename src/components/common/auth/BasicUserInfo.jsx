@@ -85,7 +85,7 @@ export const BasicUserInfo = (props) => {
 
     const handleSubmit = (ev) => {
         ev.preventDefault()
-        handleChange({ data: { userInfo, file }, newComponent: 2 })
+        handleChange({ data: { userInfo, file }, newComponent: 3 })
     }
 
     return (
@@ -133,8 +133,4 @@ export const BasicUserInfo = (props) => {
             </form>
         </Box>
     )
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 60af9548d43823bd330499c1af0c881e4a22cd1e

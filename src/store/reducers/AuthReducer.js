@@ -4,12 +4,14 @@ const INITIAL_STATE = {
 
 export function AuthReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
-        case 'SET_USER': 
+        case 'SET_LOGGED_USER': 
         return {
             ...state,
             loggedInUser: action.user
         }
         default:
-            return state
+            return {
+                ...state
+            }
     }
 }
