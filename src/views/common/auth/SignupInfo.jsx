@@ -1,5 +1,5 @@
 import { Box } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ProgressBar } from '../../../components/common/ProgressBar'
 import { BasicUserInfo } from '../../../components/common/auth/BasicUserInfo'
 import { Terms } from '../../../components/common/auth/Terms'
@@ -19,7 +19,7 @@ export const SignupInfo = () => {
     const [component, setComponent] = useState(1)
 
     const handleChange = ({ data, newComponent }) => {
-        // console.log(data);
+        console.log(data);
         setComponent(newComponent)
     }
 

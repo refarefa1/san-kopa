@@ -2,11 +2,13 @@
     box-sizing: border-box;
     font-family: 'Noto Sans Hebrew', sans-serif !important;
     direction: rtl !important;
-    // line-height: 1 !important;
+    line-height: 1 !important;
 }
 
+html,
 body {
     margin: 0;
+    height: 100%;
 }
 
 h1,
@@ -30,4 +32,8 @@ button {
 ul {
     padding: 0;
     list-style-type: none;
+}
+
+#root {
+    height: 100%;
 }

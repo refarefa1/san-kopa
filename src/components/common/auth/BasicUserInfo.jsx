@@ -133,4 +133,8 @@ export const BasicUserInfo = (props) => {
             </form>
         </Box>
     )
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 60af9548d43823bd330499c1af0c881e4a22cd1e

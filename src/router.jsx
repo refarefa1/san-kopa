@@ -6,13 +6,9 @@ import { PasswordRecovery } from "./views/common/auth/PasswordRecovery";
 import { SignupInfo } from "./views/common/auth/SignupInfo";
 
 export const router = createHashRouter([
-    // {
-    //     path: "/",
-    //     element: <SignupInfo />
-    // },
     {
         path: "/",
-        element: <SignupPage />
+        element: <HomePage />
     },
     {
         path: "/login",
@@ -20,7 +16,11 @@ export const router = createHashRouter([
     },
     {
         path: "/signup",
-        element: <HomePage />
+        element: <SignupPage />
+    },
+    {
+        path: "/signup-info",
+        element: <SignupInfo />
     },
     {
         path: "/password-recovery",
