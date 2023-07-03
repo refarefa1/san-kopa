@@ -36,7 +36,7 @@ const styles = {
   },
 };
 
-export const AuthForm = ({ type, setCmpName }) => {
+export const AuthForm = ({handleChange, type }) => {
   const dispatch = useDispatch();
 
   const initialFields = { email: ``, password: ``, rememberMe: true };
@@ -45,7 +45,7 @@ export const AuthForm = ({ type, setCmpName }) => {
   const handleSubmit = (ev) => {
     ev.preventDefault();
     dispatch(login(creds));
-    setCmpName('selectUserType')
+    handleChange({ data: {}, newComponent: 1 })    
   };
 
   return (

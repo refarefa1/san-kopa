@@ -9,12 +9,15 @@ const login = async (creds) => {
     return email === user.email && password === user.password;
   });
   return currUser
+};
 
-  // if (password === currUser.password) {
-  //   localStorage.setItem(USERS_KEY, JSON.stringify(users));
-  //   return currUser
-  // }
-  // return null;
+const updateUser = async (userId, data) => {
+  const users = await HttpService.query(USERS_KEY);
+  const currUser = users.find((user) => {
+    return userId === user._id
+  });
+  const updatedUser = {...currUser, ...data}
+  return updatedUser
 };
 
 const _createUsers = () => {
@@ -31,4 +34,5 @@ _createUsers();
 
 export const authService = {
   login,
+  updateUser,
 };

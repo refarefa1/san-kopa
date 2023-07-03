@@ -1,61 +1,71 @@
 import { Container } from "@mui/material";
-import { BasicUserInfo } from "../../../components/common/auth/BasicUserInfo";
-import { SelectUserType } from "../../../components/common/auth/SelectUserType";
-import { useReactiveAction } from "../../../hooks/useReactiveAction";
 import { InstructorAdd } from "../../../components/instructor/InstructorAdd";
 import { Terms } from "../../../components/common/auth/Terms";
 import { Message } from "../../../components/common/Message";
 import { OrganizationAdd } from "../../../components/organization/OrganizationAdd";
 import { ProgressBar } from "../../../components/common/ProgressBar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { AuthCreds } from "../../../components/common/auth/AuthCreds";
+import { Identification } from "../../../components/common/auth/Identification";
+
+const InstructorSignup = () => {
+  return (
+    <section className="InstructorSignup-page-container">
+      <h1>InstructorSignup page</h1>
+      <InstructorAdd />
+      <Terms />
+      <Message />
+    </section>
+  );
+};
+
+const OrganizationSignup = () => {
+  return (
+    <section className="OrganizationSignup-page-container">
+      <h1>OrganizationSignup page</h1>
+      <OrganizationAdd />
+      <Terms />
+      <Message />
+    </section>
+  );
+};
 
 export const SignupPage = () => {
-  
-  const InstructorSignup = () => {
-    return (
-      <section className="InstructorSignup-page-container">
-        <h1>InstructorSignup page</h1>
-        <InstructorAdd />
-        <Terms />
-        <Message />
-      </section>
-    );
+  const [component, setComponent] = useState(0);
+
+  const handleChangeSignupPage = ({ data, newComponent }) => {
+    setComponent(newComponent);
   };
 
-  const OrganizationSignup = () => {
-    return (
-      <section className="OrganizationSignup-page-container">
-        <h1>OrganizationSignup page</h1>
-        <OrganizationAdd />
-        <Terms />
-        <Message />
-      </section>
-    );
-  };
-  const [progressBarTrigger, progressBarDataHandler, currProcess] = useReactiveAction();
-  const [currCmp, setCurrCmp] = useState()
-  const [cmpName, setCmpName] = useState()
-
-  const components = {
-    'basicUserInfo': <BasicUserInfo type="signup" setCmpName={setCmpName}/>,
-    'selectUserType': <SelectUserType progressBarTrigger={progressBarTrigger} />,
-    'instructorSignup': <InstructorSignup />,
-    'organizationSignup': <OrganizationSignup />,
+  const getComponentToRender = () => {
+    switch (component) {
+      case 0:
+        return <AuthCreds type="signup" handleChange={handleChangeSignupPage} />;
+      case 1:
+        return (
+          <Identification
+            handleChange={handleChangeSignupPage}
+          />
+        );
+      case 2:
+        return <InstructorSignup handleChange={handleChangeSignupPage} />;
+      case 3:
+        return <OrganizationSignup handleChange={handleChangeSignupPage} />;
+      default:
+        return <AuthCreds type="signup" handleChange={handleChangeSignupPage} />;
+    }
   };
 
- useEffect(() => {
-  setCmpName('basicUserInfo')
-}, [])
+  const componentToRender = getComponentToRender();
 
-useEffect(() => {
-  setCurrCmp(components[cmpName])
- }, [cmpName])
-
+  const getProgress = () => {
+    return component * 33.33;
+  };
 
   return (
     <Container sx={{ px: 4.5, my: 6.5 }}>
-      <ProgressBar progressBarDataHandler={progressBarDataHandler} currProcess={currProcess} />
-      {currCmp}
+      {component > 0 && <ProgressBar progress={getProgress()} />}
+      {componentToRender}
     </Container>
   );
 };

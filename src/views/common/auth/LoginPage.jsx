@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BasicUserInfo } from "../../../components/common/auth/BasicUserInfo";
+import { AuthCreds } from "../../../components/common/auth/AuthCreds";
 import { Container } from "@mui/material";
 
 export const LoginPage = () => {
@@ -7,7 +7,7 @@ export const LoginPage = () => {
 
   return (
     <Container sx={{ px: 4.5, my: 6.5 }}>
-      <BasicUserInfo type={currType} />
+      <AuthCreds type={currType} />
     </Container>
   );
 };

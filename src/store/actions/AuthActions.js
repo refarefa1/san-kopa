@@ -10,3 +10,15 @@ export function login(creds) {
     }
   };
 }
+
+export function updateUser(userId, fields) {
+  return async (dispatch, getState) => {
+    try {
+      const user = await authService.updateUser(userId, fields)
+      const newUser = {...user, ...fields}
+      dispatch({ type: "SET_USER", newUser });
+    } catch (err) {
+      console.error('error login', err);
+    }
+  };
+}
