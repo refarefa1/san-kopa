@@ -1,27 +1,21 @@
-import { createHashRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { HomePage } from "./views/common/homepage/HomePage";
 import { LoginPage } from "./views/common/auth/LoginPage";
-// import { SignupPage } from "./views/common/auth/SignupPage";
 import { PasswordRecovery } from "./views/common/auth/PasswordRecovery";
-import { SignupInfo } from "./views/common/auth/SignupInfo";
+import { SignupPage } from "./views/common/auth/SignupPage";
 
-export const router = createHashRouter([
+export const router = createBrowserRouter([
     {
         path: "/",
-        element: <SignupInfo />
-        // element: <HomePage />
+        element: <HomePage />
     },
     {
         path: "/login",
         element: <LoginPage />
     },
-    // {
-    //     path: "/signup",
-    //     element: <SignupPage />
-    // },
     {
-        path: "/signup-info",
-        element: <SignupInfo />
+        path: "/signup",
+        element: <SignupPage />
     },
     {
         path: "/password-recovery",

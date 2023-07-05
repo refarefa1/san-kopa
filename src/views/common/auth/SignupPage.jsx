@@ -1,71 +1,57 @@
-import { Container } from "@mui/material";
-import { InstructorAdd } from "../../../components/instructor/InstructorAdd";
+import { Box, Container } from "@mui/material";
+import { useState } from "react";
+import { ProgressBar } from "../../../components/common/ProgressBar";
+import { BasicUserInfo } from "../../../components/common/auth/BasicUserInfo";
 import { Terms } from "../../../components/common/auth/Terms";
 import { Message } from "../../../components/common/Message";
-import { OrganizationAdd } from "../../../components/organization/OrganizationAdd";
-import { ProgressBar } from "../../../components/common/ProgressBar";
-import { useState } from "react";
 import { AuthCred } from "../../../components/common/auth/AuthCred";
 import { Identification } from "../../../components/common/auth/Identification";
 
-const InstructorSignup = () => {
-  return (
-    <section className="InstructorSignup-page-container">
-      <h1>InstructorSignup page</h1>
-      <InstructorAdd />
-      <Terms />
-      <Message />
-    </section>
-  );
-};
-
-const OrganizationSignup = () => {
-  return (
-    <section className="OrganizationSignup-page-container">
-      <h1>OrganizationSignup page</h1>
-      <OrganizationAdd />
-      <Terms />
-      <Message />
-    </section>
-  );
+const styles = {
+  signupInfoContainer: {
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+  },
 };
 
 export const SignupPage = () => {
   const [component, setComponent] = useState(0);
 
-  const handleChangeSignupPage = ({ data, newComponent }) => {
+  const handleChange = ({ data, newComponent }) => {
+    console.log(data);
     setComponent(newComponent);
   };
 
   const getComponentToRender = () => {
     switch (component) {
       case 0:
-        return <AuthCred type="signup" handleChange={handleChangeSignupPage} />;
+        return <AuthCred type="signup" handleChange={handleChange} />;
       case 1:
-        return (
-          <Identification
-            handleChange={handleChangeSignupPage}
-          />
-        );
+        return <Identification handleChange={handleChange} />;
       case 2:
-        return <InstructorSignup handleChange={handleChangeSignupPage} />;
+        return <BasicUserInfo handleChange={handleChange} />;
       case 3:
-        return <OrganizationSignup handleChange={handleChangeSignupPage} />;
+        return <Terms handleChange={handleChange} />;
+      case 4:
+        return <Message />;
       default:
-        return <AuthCred type="signup" handleChange={handleChangeSignupPage} />;
+        return <BasicUserInfo handleChange={handleChange} />;
     }
   };
 
   const componentToRender = getComponentToRender();
 
   const getProgress = () => {
-    return component * 33.33;
+    return component * 25;
   };
 
   return (
-    <Container sx={{ px: 4.5, my: 6.5 }}>
-      {component > 0 && <ProgressBar progress={getProgress()} />}
-      {componentToRender}
+    <Container sx={{ px:2 }}>
+      <Box sx={styles.signupInfoContainer}>
+        {component !== 0 && <ProgressBar progress={getProgress()} />}
+        {componentToRender}
+      </Box>
     </Container>
   );
 };

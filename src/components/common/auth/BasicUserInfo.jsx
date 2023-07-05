@@ -6,7 +6,7 @@ import { useFormRegister } from "../../../hooks/useFormRegister";
 
 const styles = {
     container: {
-        width: '90%',
+        width: 1,
         marginX: 'auto',
         flexGrow: 1,
         display: 'flex',
