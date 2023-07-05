@@ -1,15 +1,9 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  Divider,
-  FormControlLabel,
-  TextField,
-} from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { Box, Button, Checkbox, Divider, FormControlLabel, FormHelperText, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useFormRegister } from "../../../hooks/useFormRegister";
 import { GoogleButton } from "./googleButton";
+import { useDispatch } from "react-redux";
+import { login } from "../../../store/actions/AuthActions";
 
 const styles = {
   textInput: {
@@ -42,13 +36,16 @@ const styles = {
   },
 };
 
-export const AuthForm = () => {
+export const AuthForm = ({handleChange, type }) => {
+  const dispatch = useDispatch();
+
   const initialFields = { email: ``, password: ``, rememberMe: true };
-  const [register, setAuthData, authData] = useFormRegister(initialFields);
-  
+  const [register, setUserCred, userCred] = useFormRegister(initialFields);
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    console.log(authData);
+    dispatch(login(userCred));
+    handleChange({ data: {}, newComponent: 1 }) 
   };
 
   return (
@@ -56,32 +53,30 @@ export const AuthForm = () => {
       <GoogleButton />
       <Divider sx={{ mt: 4, mb: 1.25 }}>או</Divider>
       <TextField
-      {...register(`email`, `email`)}
+        {...register(`email`, `email`)}
         label="אימייל"
         variant="outlined"
         type="email"
         autoComplete="email"
         sx={styles.textInput}
       />
-      <TextField {...register(`password`, `password`)}
+      <TextField
+        {...register(`password`, `password`)}
         label="סיסמה"
         variant="outlined"
         sx={styles.textInput}
-      />
+        helperText={type === 'signup' ? 'על הסיסמה להכיל 8 תוים לפחות' : ''}
+        />
       <Box sx={styles.rememberMePswRecoverWrapper}>
         <FormControlLabel
-          control={
-            <Checkbox
-            {...register(`rememberMe`, `checkbox`)}
-            defaultChecked
-              // checked={value}
-            />
-          }
+          control={<Checkbox {...register(`rememberMe`, `checkbox`)} defaultChecked />}
           label="זכור אותי"
         />
-        <Link to="/password-recovery" style={styles.link}>
-          שכחת סיסמה?
-        </Link>
+        {type === "login" && (
+          <Link to="/password-recovery" style={styles.link}>
+            שכחת סיסמה?
+          </Link>
+        )}
       </Box>
       <Button type="submit" variant="contained" sx={styles.submitButton}>
         התחברות
