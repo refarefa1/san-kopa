@@ -1,1 +1,0 @@
-export const primaryColor = '#6358d8'

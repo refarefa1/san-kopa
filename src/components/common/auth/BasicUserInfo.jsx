@@ -1,4 +1,4 @@
-import { Box, Input, Typography, Icon, FormControl, TextField, Button } from "@mui/material"
+import { Box, Input, Typography, Icon, FormControl, TextField, Button, useTheme } from "@mui/material"
 import { useState } from "react"
 import { CameraIcon } from "../../../svgs/CameraIcon";
 import { primaryColor } from '../../../global/Colors.js'
@@ -63,7 +63,6 @@ const styles = {
     },
     button: {
         width: '100%',
-        height: 56,
         fontSize: 18,
         mt: 'auto',
         mb: 4
@@ -73,6 +72,7 @@ const styles = {
 export const BasicUserInfo = (props) => {
     const { handleChange } = props;
 
+    const theme = useTheme()
     const initialFields = { firstName: '', lastName: '', about: '' };
     const [register, setUserInfo, userInfo] = useFormRegister(initialFields);
     const [file, setFile] = useState(null)
@@ -125,7 +125,10 @@ export const BasicUserInfo = (props) => {
                 <Button
                     type="submit"
                     size="large"
-                    sx={styles.button}
+                    sx={{
+                        height: theme.sizes.inputHeight,
+                        ...styles.button
+                    }}
                     variant="contained"
                     disableElevation>
                     המשך
