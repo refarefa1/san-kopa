@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Tab, Box, Container, Tabs } from "@mui/material";
+import { Tab, Box, Container, Tabs, useTheme } from "@mui/material";
 import { Filter } from "../../../components/common/Filter";
 import { CardList } from "../../../components/common/CardList";
 import { NavBar } from "../../../components/common/NavBar";
@@ -10,6 +10,7 @@ import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBullet
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import { loadLectures } from "../../../store/actions/LectureActions";
+import { AppHeader } from "../../../components/common/AppHeader";
 
 const styles = {
     tab: {
@@ -60,6 +61,8 @@ export const HomePage = () => {
 
     const [component, setComponent] = useState(0);
 
+    const theme = useTheme()
+
     const navbarItems = [
         { label: 'בית', icon: <HomeOutlinedIcon /> },
         { label: 'הרצאות', icon: <FormatListBulletedOutlinedIcon /> },
@@ -74,17 +77,25 @@ export const HomePage = () => {
     const componentToRender = component === 0 ? <LecturePage /> : <InstructorPage />
 
     return (
-        <Container sx={{ pb: 10 }}>
-            <Box sx={{ py: 2 }}>
+        <Box sx={{ pb: 10 }}>
+            <AppHeader />
+            <Box
+                sx={{
+                    px: theme.layout.padding,
+                    py: 2
+                }}>
                 <Tabs value={component} onChange={handleComponentChange} TabIndicatorProps={{ style: styles.tabIndicator }}>
                     <Tab label="הרצאות" sx={styles.tab} />
                     <Tab label="מרצים" sx={styles.tab} />
                 </Tabs>
             </Box>
-            <Box>
+            <Box
+                sx={{
+                    px: theme.layout.padding,
+                }}>
                 {componentToRender}
             </Box>
             <NavBar items={navbarItems} />
-        </Container>
+        </Box>
     );
 };

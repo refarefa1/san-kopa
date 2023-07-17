@@ -6,7 +6,8 @@ import { Provider } from "react-redux";
 import { router } from "./router";
 import { store } from "./store/index";
 import { ThemeProvider } from "@mui/material";
-import { cacheRtl, muiTheme } from "./global/muiCustomConfig";
+import { cacheRtl } from "./global/muiCustomConfig";
+import { muiTheme } from "./global/Theme";
 
 const createApp = () => {
   return (

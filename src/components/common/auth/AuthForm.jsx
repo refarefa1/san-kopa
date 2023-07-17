@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Divider, FormControlLabel, FormHelperText, TextField } from "@mui/material";
+import { Box, Button, Checkbox, Divider, FormControlLabel, FormHelperText, TextField, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useFormRegister } from "../../../hooks/useFormRegister";
 import { GoogleButton } from "./googleButton";
@@ -27,8 +27,8 @@ const styles = {
     width: "100%",
     fontSize: 20,
     py: 1.5,
-    mt: 3.25,
-    borderRadius: 3,
+    mt: 'auto',
+    borderRadius: 2,
   },
   link: {
     color: "#1725AE",
@@ -36,8 +36,16 @@ const styles = {
   },
 };
 
-export const AuthForm = ({handleChange, type }) => {
+export const AuthForm = (props) => {
+  
+  const {
+    handleChange,
+    type,
+    formSx
+  } = props
+
   const dispatch = useDispatch();
+  const theme = useTheme()
 
   const initialFields = { email: ``, password: ``, rememberMe: true };
   const [register, setUserCred, userCred] = useFormRegister(initialFields);
@@ -45,11 +53,11 @@ export const AuthForm = ({handleChange, type }) => {
   const handleSubmit = (ev) => {
     ev.preventDefault();
     dispatch(login(userCred));
-    handleChange({ data: {}, newComponent: 1 }) 
+    handleChange({ data: {}, newComponent: 1 })
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ ...formSx }}>
       <GoogleButton />
       <Divider sx={{ mt: 4, mb: 1.25 }}>או</Divider>
       <TextField
@@ -66,7 +74,7 @@ export const AuthForm = ({handleChange, type }) => {
         variant="outlined"
         sx={styles.textInput}
         helperText={type === 'signup' ? 'על הסיסמה להכיל 8 תוים לפחות' : ''}
-        />
+      />
       <Box sx={styles.rememberMePswRecoverWrapper}>
         <FormControlLabel
           control={<Checkbox {...register(`rememberMe`, `checkbox`)} defaultChecked />}
@@ -78,7 +86,14 @@ export const AuthForm = ({handleChange, type }) => {
           </Link>
         )}
       </Box>
-      <Button type="submit" variant="contained" sx={styles.submitButton}>
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{
+          height: theme.sizes.inputHeight,
+          ...styles.submitButton
+        }}
+      >
         התחברות
       </Button>
     </form>
