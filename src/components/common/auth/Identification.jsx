@@ -1,8 +1,6 @@
 import { Box, Button, Paper, Typography, useTheme } from "@mui/material";
-import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
-import LocalFloristOutlinedIcon from "@mui/icons-material/LocalFloristOutlined";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { IdentificationToggleBtn } from "./IdentificationToggleBtn";
 
 const styles = {
   container: {
@@ -15,24 +13,10 @@ const styles = {
     fontSize: 20,
     fontWeight: 400,
   },
-  icon: {
-    stroke: "#fff",
-    fontSize: 68,
-  },
   paperWrapper: {
-    display: "flex",
-    width: "100%",
-    justifyContent: "center",
-    gap: 3,
+    width: "fit-content",
+    mx: "auto",
     mt: 2,
-  },
-  paper: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    width: 130,
-    height: 140,
   },
   continueButton: {
     width: "100%",
@@ -44,20 +28,18 @@ const styles = {
   },
 };
 
-export const Identification = ({ handleChange }) => {
+export const Identification = (props) => {
+  const {handleChange} = props
   const theme = useTheme();
 
-  const currUser = useSelector((state) => state.authModule.loggedInUser);
   const [userType, setUserType] = useState();
 
   const handleClick = () => {
-    //dispatch
     handleChange({ data: {}, newComponent: 2 });
   };
 
   return (
     <Box sx={styles.container}>
-      {currUser && (
         <>
           <Typography variant="p" sx={{ ...styles.p, mt: 2 }}>
             איזה כיף שהתחלת בתהליך ההרשמה!
@@ -69,18 +51,7 @@ export const Identification = ({ handleChange }) => {
             באת לכאן בתור?
           </Typography>
           <Box sx={styles.paperWrapper}>
-            <Paper variant="outlined" sx={styles.paper} onClick={() => setUserType("organization")}>
-              <LocalFloristOutlinedIcon sx={{ fill: theme.palette.primary.main, ...styles.icon }} />
-              <Typography variant="p" sx={styles.p}>
-                עמותה
-              </Typography>
-            </Paper>
-            <Paper variant="outlined" sx={styles.paper} onClick={() => setUserType("instructor")}>
-              <PermIdentityOutlinedIcon sx={styles.icon} />
-              <Typography variant="p" sx={styles.p}>
-                מרצה
-              </Typography>
-            </Paper>
+            <IdentificationToggleBtn userType={userType} setUserType={setUserType}/>
           </Box>
           <Button
             variant="contained"
@@ -93,7 +64,6 @@ export const Identification = ({ handleChange }) => {
             המשך
           </Button>
         </>
-      )}
     </Box>
   );
 };

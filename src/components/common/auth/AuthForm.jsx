@@ -1,5 +1,5 @@
 import { Box, Button, Checkbox, Divider, FormControlLabel, FormHelperText, TextField, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormRegister } from "../../../hooks/useFormRegister";
 import { GoogleButton } from "./googleButton";
 import { useDispatch } from "react-redux";
@@ -45,6 +45,7 @@ export const AuthForm = (props) => {
   } = props
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const theme = useTheme()
 
   const initialFields = { email: ``, password: ``, rememberMe: true };
@@ -52,8 +53,14 @@ export const AuthForm = (props) => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    dispatch(login(userCred));
-    handleChange({ data: {}, newComponent: 1 })
+    if(type  === 'login') {
+      dispatch(login(userCred))
+      navigate('/')
+    }
+    else{
+      // dispatch(signup(userCred))
+      handleChange({ data: {}, newComponent: 1 })
+    }
   };
 
   return (
