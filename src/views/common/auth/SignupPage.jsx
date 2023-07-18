@@ -23,7 +23,6 @@ export const SignupPage = () => {
   const theme = useTheme()
 
   const handleChange = ({ data, newComponent }) => {
-    console.log(data);
     setComponent(newComponent);
   };
 
