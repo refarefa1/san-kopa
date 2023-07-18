@@ -1,15 +1,14 @@
 import { Box, Button, Paper, Typography, useTheme } from "@mui/material";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import LocalFloristOutlinedIcon from "@mui/icons-material/LocalFloristOutlined";
-import { primaryColor } from "../../../global/Colors";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const styles = {
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1
+    display: "flex",
+    flexDirection: "column",
+    flexGrow: 1,
   },
   p: {
     display: "block",
@@ -17,7 +16,6 @@ const styles = {
     fontWeight: 400,
   },
   icon: {
-    fill: primaryColor,
     stroke: "#fff",
     fontSize: 68,
   },
@@ -26,7 +24,7 @@ const styles = {
     width: "100%",
     justifyContent: "center",
     gap: 3,
-    mt: 2
+    mt: 2,
   },
   paper: {
     display: "flex",
@@ -40,15 +38,14 @@ const styles = {
     width: "100%",
     fontSize: 20,
     py: 1.5,
-    mt: 'auto',
+    mt: "auto",
     mb: 4,
     borderRadius: 2,
   },
 };
 
 export const Identification = ({ handleChange }) => {
-
-  const theme = useTheme()
+  const theme = useTheme();
 
   const currUser = useSelector((state) => state.authModule.loggedInUser);
   const [userType, setUserType] = useState();
@@ -73,7 +70,7 @@ export const Identification = ({ handleChange }) => {
           </Typography>
           <Box sx={styles.paperWrapper}>
             <Paper variant="outlined" sx={styles.paper} onClick={() => setUserType("organization")}>
-              <LocalFloristOutlinedIcon sx={styles.icon} />
+              <LocalFloristOutlinedIcon sx={{ fill: theme.palette.primary.main, ...styles.icon }} />
               <Typography variant="p" sx={styles.p}>
                 עמותה
               </Typography>
@@ -89,7 +86,7 @@ export const Identification = ({ handleChange }) => {
             variant="contained"
             sx={{
               height: theme.sizes.inputHeight,
-              ...styles.continueButton
+              ...styles.continueButton,
             }}
             onClick={handleClick}
           >

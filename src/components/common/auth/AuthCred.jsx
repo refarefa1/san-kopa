@@ -1,6 +1,5 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
-import { primaryColor } from "../../../global/Colors";
 import { AuthForm } from "../../../components/common/auth/AuthForm";
 
 const styles = {
@@ -14,12 +13,12 @@ const styles = {
 };
 
 export const AuthCred = (props) => {
-  
   const {
     handleChange,
     type
   } = props
 
+  const theme = useTheme()
   const formSx = {
     display: "flex",
     flexDirection: 'column',
@@ -28,7 +27,7 @@ export const AuthCred = (props) => {
 
   return (
     <>
-      <Typography variant="h5" sx={{ textAlign: "center", color: primaryColor }}>
+      <Typography variant="h5" sx={{ textAlign: "center", color: theme.palette.primary.main }}>
         {type === "login" ? "התחברות לחשבון קיים" : "יצירת חשבון חדש"}
       </Typography>
       <AuthForm formSx={formSx} handleChange={handleChange} type={type} />
