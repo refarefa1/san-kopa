@@ -15,6 +15,12 @@ export const LoginPage = () => {
 
   const theme = useTheme()
 
+  const authData = {
+    email: '',
+    password: '',
+    isRememberMe: false
+  }
+
   return (
     <Box>
       <AppHeader />
@@ -22,7 +28,7 @@ export const LoginPage = () => {
         paddingX: theme.layout.padding,
         ...styles.loginContainer
       }}>
-        <AuthCred type='login' handleChange={() => { return }} />
+        <AuthCred type='login' authData={authData} />
       </Box>
     </Box>
   );

@@ -37,29 +37,37 @@ const styles = {
 };
 
 export const AuthForm = (props) => {
-  
+
   const {
     handleChange,
     type,
-    formSx
+    formSx,
+    authData
   } = props
 
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const theme = useTheme()
 
-  const initialFields = { email: ``, password: ``, rememberMe: true };
+  const { email, password, isRememberMe } = authData
+
+  const initialFields = {
+    email,
+    password,
+    isRememberMe
+  };
+
   const [register, setUserCred, userCred] = useFormRegister(initialFields);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    if(type  === 'login') {
+    if (type === 'login') {
       dispatch(login(userCred))
       navigate('/')
     }
-    else{
+    else {
       // dispatch(signup(userCred))
-      handleChange({ data: {}, newComponent: 1 })
+      handleChange({ data: { ...userCred }, newComponent: 1 })
     }
   };
 

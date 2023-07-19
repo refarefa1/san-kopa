@@ -23,7 +23,10 @@ const styles = {
   },
 };
 
-export const AppHeader = () => {
+export const AppHeader = (props) => {
+
+  const { onBack } = props
+
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
@@ -48,9 +51,9 @@ export const AppHeader = () => {
       }}
     >
       {isLocationLoginSignup && (
-        <Link to="/">
+        <Box onClick={onBack}>
           <BackArrow />
-        </Link>
+        </Box>
       )}
 
       {!loggedInUser && location.pathname === "/" && (
@@ -67,13 +70,13 @@ export const AppHeader = () => {
         </Button>
       )}
 
-      {loggedInUser && !isLocationLoginSignup && 
-      <Box sx={{display: "flex"}}>
-        {loggedInUser.profileImgUrl && 
-        <img src={loggedInUser.profileImgUrl}></img>
-        }
-        {!loggedInUser.profileImgUrl && <ProfileImgPlaceholder/>}
-      </Box>}
+      {loggedInUser && !isLocationLoginSignup &&
+        <Box sx={{ display: "flex" }}>
+          {loggedInUser.profileImgUrl &&
+            <img src={loggedInUser.profileImgUrl}></img>
+          }
+          {!loggedInUser.profileImgUrl && <ProfileImgPlaceholder />}
+        </Box>}
 
       <Logo />
     </Box>

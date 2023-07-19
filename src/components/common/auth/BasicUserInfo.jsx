@@ -76,11 +76,19 @@ const styles = {
 };
 
 export const BasicUserInfo = (props) => {
-  const { handleChange } = props;
+  const {
+    handleChange,
+    authData
+  } = props;
 
   const theme = useTheme();
-  const initialFields = { firstName: "", lastName: "", about: "" };
+
+  const { firstName, lastName, about } = authData
+
+  const initialFields = { firstName, lastName, about };
+
   const [register, setUserInfo, userInfo] = useFormRegister(initialFields);
+
   const [file, setFile] = useState(null);
 
   const handleUpload = ({ target }) => {
@@ -91,7 +99,7 @@ export const BasicUserInfo = (props) => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    handleChange({ data: { userInfo, file }, newComponent: 3 });
+    handleChange({ data: { ...userInfo, avatar: file }, newComponent: 3 });
   };
 
   return (

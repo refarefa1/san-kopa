@@ -15,7 +15,8 @@ const styles = {
 export const AuthCred = (props) => {
   const {
     handleChange,
-    type
+    type,
+    authData
   } = props
 
   const theme = useTheme()
@@ -30,7 +31,7 @@ export const AuthCred = (props) => {
       <Typography variant="h5" sx={{ textAlign: "center", color: theme.palette.primary.main }}>
         {type === "login" ? "התחברות לחשבון קיים" : "יצירת חשבון חדש"}
       </Typography>
-      <AuthForm formSx={formSx} handleChange={handleChange} type={type} />
+      <AuthForm formSx={formSx} handleChange={handleChange} type={type} authData={authData} />
       <Box sx={styles.switchToSignupWrapper}>
         <Typography variant="p" color="text.disabled">
           {type === "login" ? "עוד אין לך חשבון?" : "כבר יש לך חשבון?"}
