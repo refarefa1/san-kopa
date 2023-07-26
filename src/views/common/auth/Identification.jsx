@@ -1,7 +1,7 @@
-import { Box, Button, Paper, Typography, useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
-import { IdentificationToggleBtn } from "./IdentificationToggleBtn";
-import { useFormRegister } from "../../../hooks/useFormRegister";
+import { IdentificationToggleBtn } from "../../../components/common/auth/IdentificationToggleBtn";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 const styles = {
   container: {
@@ -29,18 +29,23 @@ const styles = {
   },
 };
 
-export const Identification = (props) => {
+export const Identification = () => {
+
+  const context = useOutletContext();
+  const navigate = useNavigate()
+
   const {
     handleChange,
     authData
-  } = props
+  } = context
 
   const theme = useTheme();
 
   const [userType, setUserType] = useState(authData.userType);
 
   const handleClick = () => {
-    handleChange({ data: { userType }, newComponent: 2 });
+    handleChange({ data: { userType } });
+    navigate(`/signup/${userType}`)
   };
 
 

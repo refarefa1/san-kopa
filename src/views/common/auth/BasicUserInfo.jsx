@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import { CameraIcon } from "../../../svgs/CameraIcon";
 import { useFormRegister } from "../../../hooks/useFormRegister";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 const styles = {
   container: {
@@ -75,11 +76,15 @@ const styles = {
   },
 };
 
-export const BasicUserInfo = (props) => {
+export const BasicUserInfo = () => {
+
+  const context = useOutletContext();
+  const navigate = useNavigate()
+
   const {
     handleChange,
     authData
-  } = props;
+  } = context;
 
   const theme = useTheme();
 
@@ -99,7 +104,9 @@ export const BasicUserInfo = (props) => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    handleChange({ data: { ...userInfo, avatar: file }, newComponent: 3 });
+    handleChange({ data: { ...userInfo, avatar: file } });
+    const {userType} = authData
+    navigate(`/signup/${userType}/terms`)
   };
 
   return (

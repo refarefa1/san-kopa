@@ -1,14 +1,14 @@
 const INITIAL_STATE = {
-    loggedInUser: null
+    user: null
 }
 
 export function AuthReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
-        case 'SET_LOGGED_USER': 
-        return {
-            ...state,
-            loggedInUser: action.user
-        }
+        case 'SET_USER':
+            return {
+                ...state,
+                user: action.user
+            }
         default:
             return {
                 ...state

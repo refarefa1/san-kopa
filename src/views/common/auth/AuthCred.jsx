@@ -1,5 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { AuthForm } from "../../../components/common/auth/AuthForm";
 
 const styles = {
@@ -12,12 +12,16 @@ const styles = {
   },
 };
 
-export const AuthCred = (props) => {
+export const AuthCred = () => {
+
+  const context = useOutletContext();
+  const navigate = useNavigate()
+
   const {
     handleChange,
     type,
     authData
-  } = props
+  } = context
 
   const theme = useTheme()
   const formSx = {
@@ -26,12 +30,18 @@ export const AuthCred = (props) => {
     flexGrow: 1
   }
 
+  const onChange = (data) => {
+    handleChange(data)
+    if (type === 'signup') navigate('identification')
+    else if (type === 'login') navigate('/') // Need to remove this line and validate login details in LoginPage
+  }
+
   return (
     <>
       <Typography variant="h5" sx={{ textAlign: "center", color: theme.palette.primary.main }}>
         {type === "login" ? "התחברות לחשבון קיים" : "יצירת חשבון חדש"}
       </Typography>
-      <AuthForm formSx={formSx} handleChange={handleChange} type={type} authData={authData} />
+      <AuthForm formSx={formSx} handleChange={onChange} type={type} authData={authData} />
       <Box sx={styles.switchToSignupWrapper}>
         <Typography variant="p" color="text.disabled">
           {type === "login" ? "עוד אין לך חשבון?" : "כבר יש לך חשבון?"}

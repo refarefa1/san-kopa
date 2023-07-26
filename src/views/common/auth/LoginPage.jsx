@@ -1,6 +1,6 @@
 import { Box, useTheme } from "@mui/material";
 import { AppHeader } from "../../../components/common/AppHeader";
-import { AuthCred } from "../../../components/common/auth/AuthCred";
+import { AuthCred } from "./AuthCred";
 
 const styles = {
   loginContainer: {
