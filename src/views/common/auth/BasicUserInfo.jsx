@@ -1,13 +1,4 @@
-import {
-  Box,
-  Input,
-  Typography,
-  Icon,
-  FormControl,
-  TextField,
-  Button,
-  useTheme,
-} from "@mui/material";
+import { Box, Input, Typography, Icon, FormControl, TextField, Button, useTheme } from "@mui/material";
 import { useState } from "react";
 import { CameraIcon } from "../../../svgs/CameraIcon";
 import { useFormRegister } from "../../../hooks/useFormRegister";
@@ -79,12 +70,9 @@ const styles = {
 export const BasicUserInfo = () => {
 
   const context = useOutletContext();
-  const navigate = useNavigate()
 
-  const {
-    handleChange,
-    authData
-  } = context;
+  const navigate = useNavigate()
+  const { handleChange, authData, updateProgress } = context;
 
   const theme = useTheme();
 
@@ -105,7 +93,8 @@ export const BasicUserInfo = () => {
   const handleSubmit = (ev) => {
     ev.preventDefault();
     handleChange({ data: { ...userInfo, avatar: file } });
-    const {userType} = authData
+    updateProgress(1)
+    const { userType } = authData
     navigate(`/signup/${userType}/terms`)
   };
 

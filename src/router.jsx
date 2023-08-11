@@ -10,6 +10,7 @@ import { Terms } from "./views/common/auth/Terms";
 import { Identification } from "./views/common/auth/Identification";
 import { AuthCred } from "./views/common/auth/AuthCred";
 import { BasicUserInfo } from "./views/common/auth/BasicUserInfo";
+import { AdditionalInfo } from './views/common/auth/AdditionalInfo';
 
 export const router = createBrowserRouter([
     {
@@ -38,7 +39,7 @@ export const router = createBrowserRouter([
                 children: [
                     {
                         path: '',
-                        element: <div>Need to change it</div>
+                        element: <AdditionalInfo />
                     },
                     {
                         path: 'user-info',
@@ -52,7 +53,6 @@ export const router = createBrowserRouter([
                         path: 'success',
                         element: <Message />
                     },
-
                 ]
             },
             {
