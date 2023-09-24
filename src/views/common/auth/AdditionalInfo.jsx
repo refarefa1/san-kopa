@@ -45,30 +45,26 @@ const styles = {
     },
 };
 
-
 export const AdditionalInfo = () => {
-
     const context = useOutletContext();
+    const { authData, handleChange } = context;
+
     const navigate = useNavigate();
-
-    const { authData, handleChange, updateProgress } = context;
-
-    const [orgData, setOrgData] = useState(authData)
 
     const theme = useTheme();
 
-    const { orgName, orgNum, orgAreaOfOp, orgAbout } = authData
+    const { name, organizationalNum, areaOfOperation, description } = authData
 
-    const initialFields = (!orgName && !orgNum, !orgAreaOfOp, !orgAbout) ? { orgName: '', orgNum: '', orgAreaOfOp: '', orgAbout: '' } : { orgName: orgName, orgNum: orgNum, orgAreaOfOp: orgAreaOfOp, orgAbout: orgAbout }
+    const initialFields = (!name && !organizationalNum, !areaOfOperation, !description) ?
+        { name: '', organizationalNum: '', areaOfOperation: '', description: '' } :
+        { name, organizationalNum, areaOfOperation, description }
 
     const [register, setOrgInfo, orgInfo] = useFormRegister(initialFields)
 
     const handleSubmit = () => {
         handleChange({ data: { ...orgInfo, ...authData } })
-        updateProgress(1)
         navigate('user-info')
     }
-
 
     return (
         <Box>
@@ -80,21 +76,21 @@ export const AdditionalInfo = () => {
                         sx={styles.nameInput}
                         label="שם העמותה"
                         variant="outlined"
-                        {...register("orgName")}
+                        {...register("name")}
                     />
                     <TextField
                         required
                         sx={styles.nameInput}
                         label="מספר אירגון"
                         variant="outlined"
-                        {...register("orgNum")}
+                        {...register("organizationalNum")}
                     />
                     <TextField
                         required
                         sx={styles.nameInput}
                         label="תחום עיסוק העמותה"
                         variant="outlined"
-                        {...register("orgAreaOfOp")}
+                        {...register("areaOfOperation")}
                     />
                     <TextField
                         sx={styles.textArea}
@@ -102,7 +98,7 @@ export const AdditionalInfo = () => {
                         rows={4}
                         label="כמה מילים על העמותה..."
                         variant="outlined"
-                        {...register("orgAbout")}
+                        {...register("description")}
                     />
                 </Box>
                 <Button

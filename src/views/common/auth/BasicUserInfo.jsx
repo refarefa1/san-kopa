@@ -68,20 +68,16 @@ const styles = {
 };
 
 export const BasicUserInfo = () => {
-
   const context = useOutletContext();
+  const { handleChange, authData } = context;
 
   const navigate = useNavigate()
-  const { handleChange, authData, updateProgress } = context;
-
   const theme = useTheme();
 
   const { firstName, lastName, about } = authData
-
   const initialFields = { firstName, lastName, about };
 
   const [register, setUserInfo, userInfo] = useFormRegister(initialFields);
-
   const [file, setFile] = useState(null);
 
   const handleUpload = ({ target }) => {
@@ -93,7 +89,6 @@ export const BasicUserInfo = () => {
   const handleSubmit = (ev) => {
     ev.preventDefault();
     handleChange({ data: { ...userInfo, avatar: file } });
-    updateProgress(1)
     const { userType } = authData
     navigate(`/signup/${userType}/terms`)
   };

@@ -12,7 +12,7 @@ export const InstructorSignupPage = () => {
         switch (location.pathname) {
             case '/signup/instructor': return SIGNUP_SECTIONS_PERCENTAGE * 1
             case '/signup/instructor/terms': return SIGNUP_SECTIONS_PERCENTAGE * 2
-            case '/signup/success': return SIGNUP_SECTIONS_PERCENTAGE * 3
+            case '/signup/instructor/success': return SIGNUP_SECTIONS_PERCENTAGE * 3
         }
     }, [location.pathname])
 

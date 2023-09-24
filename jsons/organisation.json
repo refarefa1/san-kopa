@@ -1,7 +1,8 @@
 {
-    "id": "",
-    "name": "",
-    "field": "",
-    "about": "",
-    "logo": ""
+    "id": "string",
+    "organizationalNum": "number",
+    "name": "string",
+    "field": "string",
+    "description": "string",
+    "logo": "string"
 }

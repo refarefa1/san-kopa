@@ -32,15 +32,6 @@ export const SignupPage = () => {
 
   const [authData, setAuthData] = useState(initialAuthData)
 
-  const [progress, setProgress] = useState(25)
-
-  const updateProgress = (direction) => {
-    let num = 20
-    if (location.pathname.includes('organization')) {
-      num = 25
-    }
-    setProgress(prevProgress => (prevProgress + (num * direction)))
-  }
   const handleChange = ({ data, isLogin }) => {
     if (isLogin) {
       // dispatch to store
@@ -50,11 +41,10 @@ export const SignupPage = () => {
   };
 
   const onBack = () => {
-    updateProgress(-1)
     navigate(-1)
   }
 
-  const context = { handleChange: handleChange, authData: authData, type: 'signup', progress: progress, updateProgress: updateProgress }
+  const context = { handleChange: handleChange, authData: authData, type: 'signup' }
 
   return (
     <Box >

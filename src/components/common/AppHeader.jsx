@@ -24,16 +24,14 @@ const styles = {
 };
 
 export const AppHeader = (props) => {
-
   const { onBack } = props
-  console.log("🚀 ~ file: AppHeader.jsx:29 ~ AppHeader ~ props:", props)
 
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
 
   const loggedInUser = useSelector((state) => state.authModule.loggedInUser);
-  const [isLocationLoginSignup, setIsLocationLoginSignup] = useState(
+  const [isAuthPage, setIsAuthPage] = useState(
     location.pathname.includes("login") || location.pathname.includes("signup")
   );
 
@@ -51,7 +49,7 @@ export const AppHeader = (props) => {
         ...styles.header,
       }}
     >
-      {isLocationLoginSignup && (
+      {isAuthPage && (
         <Box onClick={onBack}>
           <BackArrow />
         </Box>
@@ -71,7 +69,7 @@ export const AppHeader = (props) => {
         </Button>
       )}
 
-      {loggedInUser && !isLocationLoginSignup &&
+      {loggedInUser && !isAuthPage &&
         <Box sx={{ display: "flex" }}>
           {loggedInUser.profileImgUrl &&
             <img src={loggedInUser.profileImgUrl}></img>
