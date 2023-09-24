@@ -24,7 +24,7 @@ export const Terms = (props) => {
     const context = useOutletContext();
     const navigate = useNavigate()
 
-    const { handleChange, authData } = context
+    const { handleChange, authData, updateProgress } = context
 
     const theme = useTheme()
 
@@ -32,6 +32,7 @@ export const Terms = (props) => {
 
     const onChange = () => {
         handleChange({ isLogin: true })
+        updateProgress(1)
         const { userType } = authData
         navigate(`/signup/${userType}/success`)
     }

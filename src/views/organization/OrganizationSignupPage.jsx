@@ -1,3 +1,6 @@
+import { Fragment } from "react";
+import { Outlet, useOutletContext } from "react-router-dom"
+import { ProgressBar } from '../../components/common/ProgressBar';
 import { useMemo } from "react";
 import { Outlet, useLocation, useOutletContext } from "react-router-dom"
 import { ProgressBar } from "../../components/common/ProgressBar";
@@ -6,6 +9,7 @@ const SIGNUP_SECTIONS_PERCENTAGE = 25
 
 export const OrganizationSignupPage = () => {
     const context = useOutletContext();
+    const { progress } = context
     const location = useLocation()
 
     const progress = useMemo(() => {

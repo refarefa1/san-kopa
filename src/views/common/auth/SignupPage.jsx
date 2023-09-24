@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, useTheme } from "@mui/material";
 import { ProgressBar } from "../../../components/common/ProgressBar";
 import { AppHeader } from "../../../components/common/AppHeader";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const styles = {
   signupInfoContainer: {
@@ -16,6 +16,8 @@ const styles = {
 export const SignupPage = () => {
 
   const navigate = useNavigate()
+  const location = useLocation();
+  const theme = useTheme()
 
   const initialAuthData = {
     email: '',
@@ -30,8 +32,15 @@ export const SignupPage = () => {
 
   const [authData, setAuthData] = useState(initialAuthData)
 
-  const theme = useTheme()
+  const [progress, setProgress] = useState(25)
 
+  const updateProgress = (direction) => {
+    let num = 20
+    if (location.pathname.includes('organization')) {
+      num = 25
+    }
+    setProgress(prevProgress => (prevProgress + (num * direction)))
+  }
   const handleChange = ({ data, isLogin }) => {
     if (isLogin) {
       // dispatch to store
@@ -41,10 +50,11 @@ export const SignupPage = () => {
   };
 
   const onBack = () => {
+    updateProgress(-1)
     navigate(-1)
   }
 
-  const context = { handleChange: handleChange, authData: authData, type: 'signup' }
+  const context = { handleChange: handleChange, authData: authData, type: 'signup', progress: progress, updateProgress: updateProgress }
 
   return (
     <Box >
