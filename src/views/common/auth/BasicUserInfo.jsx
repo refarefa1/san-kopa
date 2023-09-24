@@ -4,6 +4,7 @@ import { CameraIcon } from '../../../svgs/CameraIcon';
 import { useFormRegister } from '../../../hooks/useFormRegister';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { StandardInput } from '../../../components/common/inputs/StandardInput';
+import { InputTypes } from '../../../types/inputs';
 
 const styles = {
   container: {
@@ -120,7 +121,7 @@ export const BasicUserInfo = () => {
       <form onSubmit={handleSubmit} style={styles.form}>
         <Box sx={styles.formWrapper}>
           <StandardInput
-            type='string'
+            type={InputTypes.STRING}
             required
             sx={styles.nameInput}
             label='שם פרטי'
@@ -128,7 +129,7 @@ export const BasicUserInfo = () => {
             id='firstName'
           />
           <StandardInput
-            type='string'
+            type={InputTypes.STRING}
             required
             sx={styles.nameInput}
             label='שם משפחה'
@@ -136,7 +137,7 @@ export const BasicUserInfo = () => {
             id='lastName'
           />
           <StandardInput
-            type='string'
+            type={InputTypes.STRING}
             sx={styles.textArea}
             multiline
             rows={4}

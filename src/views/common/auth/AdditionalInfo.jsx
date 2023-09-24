@@ -2,6 +2,7 @@ import { Box, Typography, Button, useTheme } from "@mui/material";
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { useFormRegister } from "../../../hooks/useFormRegister";
 import { StandardInput } from '../../../components/common/inputs/StandardInput';
+import { InputTypes } from "../../../types/inputs";
 
 const styles = {
     container: {
@@ -68,7 +69,7 @@ export const AdditionalInfo = () => {
             <form onSubmit={handleSubmit} style={styles.form}>
                 <Box sx={styles.formWrapper}>
                     <StandardInput
-                        type="string"
+                        type={InputTypes.STRING}
                         required
                         sx={styles.nameInput}
                         label="שם העמותה"
@@ -76,15 +77,15 @@ export const AdditionalInfo = () => {
                         id='name'
                     />
                     <StandardInput
+                        type={InputTypes.NUMBER}
                         required
-                        type="number"
                         sx={styles.nameInput}
                         label="מספר אירגון"
                         register={register}
                         id='organizationalNum'
                     />
                     <StandardInput
-                        type="string"
+                        type={InputTypes.STRING}
                         required
                         sx={styles.nameInput}
                         label="תחום עיסוק העמותה"
@@ -92,7 +93,7 @@ export const AdditionalInfo = () => {
                         id='areaOfOperation'
                     />
                     <StandardInput
-                        type="string"
+                        type={InputTypes.STRING}
                         sx={styles.textArea}
                         multiline
                         rows={4}

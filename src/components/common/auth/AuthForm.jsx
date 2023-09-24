@@ -4,6 +4,7 @@ import { useFormRegister } from "../../../hooks/useFormRegister";
 import { GoogleButton } from "./googleButton";
 import { useDispatch } from "react-redux";
 import { StandardInput } from "../inputs/StandardInput";
+import { InputTypes } from "../../../types/inputs";
 
 const styles = {
   textInput: {
@@ -54,7 +55,7 @@ export const AuthForm = (props) => {
       <GoogleButton />
       <Divider sx={{ marginTop: 4, marginBottom: 1.25 }}>או</Divider>
       <StandardInput
-        type="email"
+        type={InputTypes.EMAIL}
         label="אימייל"
         autoComplete="email"
         sx={styles.textInput}
@@ -62,7 +63,7 @@ export const AuthForm = (props) => {
         id='email'
       />
       <StandardInput
-        type="string"
+        type={InputTypes.PASSWORD}
         label="סיסמה"
         sx={styles.textInput}
         helperText={type === 'signup' ? 'על הסיסמה להכיל 8 תוים לפחות' : ''}
@@ -71,7 +72,7 @@ export const AuthForm = (props) => {
       />
       <Box sx={styles.rememberMePswRecoverWrapper}>
         <StandardInput
-          type="checkbox"
+          type={InputTypes.CHECKBOX}
           label="זכור אותי"
           register={register}
           id="isRememberMe"
