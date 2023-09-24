@@ -70,6 +70,11 @@ export const HomePage = () => {
         { label: 'הודעות', icon: <ChatBubbleOutlineOutlinedIcon /> }
     ]
 
+    const guestNavBarItems = [
+        { label: 'מי אנחנו?' },
+        { label: 'צור קשר' },
+    ]
+
     const handleComponentChange = (event, newComponent) => {
         setComponent(newComponent);
     };
@@ -95,7 +100,7 @@ export const HomePage = () => {
                 }}>
                 {componentToRender}
             </Box>
-            <NavBar items={navbarItems} />
+            <NavBar items={navbarItems} guestItems={guestNavBarItems} />
         </Box>
     );
 };

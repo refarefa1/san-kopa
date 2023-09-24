@@ -4,7 +4,7 @@ import { LoginPage } from "./views/common/auth/LoginPage";
 import { PasswordRecovery } from "./views/common/auth/PasswordRecovery";
 import { SignupPage } from "./views/common/auth/SignupPage";
 import { OrganizationSignupPage } from "./views/organization/OrganizationSignupPage";
-import { InstructorSignupPage } from "./views/instructor/InstructorEditPage";
+import { InstructorSignupPage } from "./views/instructor/InstructorSignupPage";
 import { Message } from "./components/common/Message";
 import { Terms } from "./views/common/auth/Terms";
 import { Identification } from "./views/common/auth/Identification";
@@ -19,7 +19,13 @@ export const router = createBrowserRouter([
     },
     {
         path: "/login",
-        element: <LoginPage />
+        element: <LoginPage />,
+        children: [
+            {
+                path: '',
+                element: <AuthCred />
+            }
+        ]
     },
     {
         path: "/signup",

@@ -10,25 +10,19 @@ const styles = {
     gap: 1.5,
     my: 3,
   },
-};
-
-export const AuthCred = () => {
-
-  const context = useOutletContext();
-  const navigate = useNavigate()
-
-  const {
-    handleChange,
-    type,
-    authData
-  } = context
-
-  const theme = useTheme()
-  const formSx = {
+  form: {
     display: "flex",
     flexDirection: 'column',
     flexGrow: 1
   }
+};
+
+export const AuthCred = () => {
+  const context = useOutletContext();
+  const { handleChange, type, authData } = context
+
+  const navigate = useNavigate()
+  const theme = useTheme()
 
   const onChange = (data) => {
     handleChange(data)
@@ -41,7 +35,7 @@ export const AuthCred = () => {
       <Typography variant="h5" sx={{ textAlign: "center", color: theme.palette.primary.main }}>
         {type === "login" ? "התחברות לחשבון קיים" : "יצירת חשבון חדש"}
       </Typography>
-      <AuthForm formSx={formSx} handleChange={onChange} type={type} authData={authData} />
+      <AuthForm formSx={styles.form} handleChange={onChange} type={type} authData={authData} />
       <Box sx={styles.switchToSignupWrapper}>
         <Typography variant="p" color="text.disabled">
           {type === "login" ? "עוד אין לך חשבון?" : "כבר יש לך חשבון?"}

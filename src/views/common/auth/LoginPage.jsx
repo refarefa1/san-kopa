@@ -1,6 +1,6 @@
 import { Box, useTheme } from "@mui/material";
 import { AppHeader } from "../../../components/common/AppHeader";
-import { AuthCred } from "./AuthCred";
+import { Outlet } from "react-router-dom";
 
 const styles = {
   loginContainer: {
@@ -21,14 +21,17 @@ export const LoginPage = () => {
     isRememberMe: false
   }
 
+  const handleChange = () => {
+    console.log('Change');
+  }
+
+  const context = { type: 'login', authData: authData, handleChange: handleChange }
+
   return (
     <Box>
       <AppHeader />
-      <Box sx={{
-        paddingX: theme.layout.padding,
-        ...styles.loginContainer
-      }}>
-        <AuthCred type='login' authData={authData} />
+      <Box sx={{ paddingX: theme.layout.padding, ...styles.loginContainer }}>
+        <Outlet context={context} />
       </Box>
     </Box>
   );

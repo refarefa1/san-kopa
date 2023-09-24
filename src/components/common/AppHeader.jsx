@@ -1,11 +1,11 @@
 import { Button, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Logo } from "../../svgs/Logo";
 import { BackArrow } from "../../svgs/BackArrow";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ProfileImgPlaceholder } from "../../svgs/ProfileImgPlaceholder";
 
 const styles = {
@@ -26,6 +26,7 @@ const styles = {
 export const AppHeader = (props) => {
 
   const { onBack } = props
+  console.log("🚀 ~ file: AppHeader.jsx:29 ~ AppHeader ~ props:", props)
 
   const navigate = useNavigate();
   const location = useLocation();

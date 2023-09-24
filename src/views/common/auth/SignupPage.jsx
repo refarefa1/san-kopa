@@ -54,8 +54,6 @@ export const SignupPage = () => {
     navigate(-1)
   }
 
-
-
   const context = { handleChange: handleChange, authData: authData, type: 'signup', progress: progress, updateProgress: updateProgress }
 
   return (
