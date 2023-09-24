@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { Paper, useTheme } from "@mui/material";
@@ -44,25 +44,34 @@ export const NavBar = (props) => {
   };
 
   const loggedInUser = useSelector((state) => state.authModule.user);
-  
+
+  const relevantItems = useMemo(() => {
+    if (loggedInUser) return items;
+    else return guestItems;
+  }, [items, guestItems, loggedInUser]);
+
+  const backgroundColor = loggedInUser ? '' : `${theme.palette.primary.main}`;
   return (
     <Paper
       sx={{ borderTop: `3px solid ${theme.palette.primary.main}`, ...styles.navbarContainer }}
       elevation={20}
     >
       {
-        loggedInUser ?
-          (<BottomNavigation sx={styles.navbar} showLabels value={value} onChange={setNewValue}>
-            {items.map((item, idx) => (
-              <BottomNavigationAction sx={styles.item} key={idx} label={item.label} icon={item.icon} />
-            ))}
-          </BottomNavigation>)
-          :
-          (<BottomNavigation sx={{ backgroundColor: `${theme.palette.primary.main}`, ...styles.navbar }} showLabels value={value} onChange={setNewValue}>
-            {guestItems.map((item, idx) => (
-              <BottomNavigationAction sx={styles.guestItem} key={idx} label={item.label} />
-            ))}
-          </BottomNavigation>)
+        <BottomNavigation
+          sx={{ ...styles.navbar, backgroundColor }}
+          showLabels
+          value={value}
+          onChange={setNewValue}
+        >
+          {
+            relevantItems.map((item, idx) => {
+              const extraProps = loggedInUser ?
+                { sx: styles.item, icon: item.icon } :
+                { sx: styles.guestItem };
+              return <BottomNavigationAction key={idx} label={item.label} {...extraProps} />;
+            })
+          }
+        </BottomNavigation>
       }
 
     </Paper >
