@@ -1,23 +1,24 @@
 import { useState } from "react";
 import { Box, useTheme } from "@mui/material";
-import { ProgressBar } from "../../../components/common/ProgressBar";
 import { AppHeader } from "../../../components/common/AppHeader";
-import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../../store/actions/AuthActions";
 
 const styles = {
   signupInfoContainer: {
     minHeight: 'calc(100vh - 66px)',
     display: "flex",
     flexDirection: "column",
-    pt: 4
+    paddingTop: 4
   },
 };
 
 export const SignupPage = () => {
 
-  const navigate = useNavigate()
-  const location = useLocation();
-  const theme = useTheme()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const theme = useTheme();
 
   const initialAuthData = {
     email: '',
@@ -26,25 +27,26 @@ export const SignupPage = () => {
     userType: null,
     firstName: '',
     lastName: '',
-    about: '',
+    description: '',
     avatar: null
-  }
+  };
 
-  const [authData, setAuthData] = useState(initialAuthData)
+  const [authData, setAuthData] = useState(initialAuthData);
 
-  const handleChange = ({ data, isLogin }) => {
-    if (isLogin) {
-      // dispatch to store
-      // Here login and return
-    }
-    setAuthData(prevData => ({ ...prevData, ...data }));
+  const handleChange = (data = {}, isLogin) => {
+    setAuthData(prevData => {
+      const newAuthData = { ...prevData, ...data };
+      console.log("🚀 ~ file: SignupPage.jsx:39 ~ handleChange ~ newAuthData:", newAuthData)
+      if (isLogin) dispatch(login(newAuthData));
+      return newAuthData;
+    });
   };
 
   const onBack = () => {
-    navigate(-1)
-  }
+    navigate(-1);
+  };
 
-  const context = { handleChange: handleChange, authData: authData, type: 'signup' }
+  const context = { handleChange: handleChange, authData: authData, type: 'signup' };
 
   return (
     <Box >

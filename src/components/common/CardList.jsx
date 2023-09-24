@@ -6,7 +6,7 @@ import { SkeletonItems } from './SkeletonItems'
 const styles = {
     list: {
         maxWidth: 500,
-        p: 0,
+        padding: 0,
         flexGrow: 1,
         boxShadow: 'none'
     }

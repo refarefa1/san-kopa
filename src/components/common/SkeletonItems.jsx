@@ -22,7 +22,7 @@ const styles = {
         width: '100%'
     },
     infoSkeletonContainer: {
-        pl: 2,
+        paddingLeft: 2,
         display: 'flex',
         flexDirection: 'column'
     },
@@ -38,8 +38,8 @@ export const SkeletonItems = () => {
                         <Skeleton sx={styles.imageSkeleton} />
                     </Grid>
                     <Grid xs={8} item sx={styles.infoSkeletonContainer}>
-                        <Skeleton variant="text" sx={{ width: '80%', height: 48, mt: -1 }} />
-                        <Skeleton variant="text" sx={{ width: '60%', height: 24, mt: -1 }} />
+                        <Skeleton variant="text" sx={{ width: '80%', height: 48, marginTop: -1 }} />
+                        <Skeleton variant="text" sx={{ width: '60%', height: 24, marginTop: -1 }} />
                     </Grid>
                 </Grid>
             )}

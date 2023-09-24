@@ -8,7 +8,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     gap: 1.5,
-    my: 3,
+    marginY: 3,
   },
   form: {
     display: "flex",

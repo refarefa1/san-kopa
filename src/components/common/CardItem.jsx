@@ -2,14 +2,14 @@ import { Box, ButtonBase, CardMedia, Chip, Grid, ListItem, Typography } from "@m
 
 const styles = {
     item: {
-        p: 0
+        padding: 0
     },
     gridContainer: {
         border: '1px solid #D3D3D3',
         borderRadius: '10px',
         overflow: 'hidden',
         flexWrap: 'unset ',
-        mb: 2
+        marginBottom: 2
     },
     imageContainer: {
         height: '100%',
@@ -23,7 +23,7 @@ const styles = {
     },
     info: {
         px: 1.5,
-        py: 1,
+        paddingY: 1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'space-between',
@@ -46,7 +46,7 @@ export const CardItem = (props) => {
                 <Grid item xs={8} sm sx={styles.info}>
                     <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{item.name}</Typography>
                     <Typography>{item.lecturer.name}</Typography>
-                    <Box sx={{ mt: 'auto' }}>
+                    <Box sx={{ marginTop: 'auto' }}>
                         {item.fields.map((field, idx) =>
                             <Chip sx={{ mr: '12px' }} size="small" key={idx} label={field} />
                         )}

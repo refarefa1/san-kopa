@@ -4,7 +4,7 @@ const styles = {
     container: {
         width: '90%',
         marginX: 'auto',
-        mb: 3
+        marginBottom: 3
     },
     ProgressBar: {
         height: 12,

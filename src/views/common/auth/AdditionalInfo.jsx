@@ -1,9 +1,7 @@
-import { Box, Input, Typography, FormControl, TextField, Button, useTheme, css } from "@mui/material";
+import { Box, Typography, Button, useTheme } from "@mui/material";
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { useFormRegister } from "../../../hooks/useFormRegister";
-import { useEffect, useState } from 'react';
-import { useEffectUpdate } from '../../../hooks/useEffectUpdate';
-
+import { StandardInput } from '../../../components/common/inputs/StandardInput';
 
 const styles = {
     container: {
@@ -35,13 +33,13 @@ const styles = {
     },
     textArea: {
         width: "100%",
-        my: 2,
+        marginY: 2,
     },
     button: {
         width: "100%",
         fontSize: 18,
-        mt: "auto",
-        mb: 4,
+        marginTop: "auto",
+        marginBottom: 4,
     },
 };
 
@@ -53,63 +51,65 @@ export const AdditionalInfo = () => {
 
     const theme = useTheme();
 
-    const { name, organizationalNum, areaOfOperation, description } = authData
+    const { name = '', organizationalNum = 0, areaOfOperation = '', description = '' } = authData;
 
-    const initialFields = (!name && !organizationalNum, !areaOfOperation, !description) ?
-        { name: '', organizationalNum: '', areaOfOperation: '', description: '' } :
-        { name, organizationalNum, areaOfOperation, description }
+    const initialFields = { name, organizationalNum, areaOfOperation, description };
 
-    const [register, setOrgInfo, orgInfo] = useFormRegister(initialFields)
+    const [register, setOrganizationInfo, organizationInfo] = useFormRegister(initialFields);
 
     const handleSubmit = () => {
-        handleChange({ data: { ...orgInfo, ...authData } })
-        navigate('user-info')
-    }
+        handleChange(organizationInfo);
+        navigate('user-info');
+    };
 
     return (
         <Box>
             <Typography sx={styles.title}>קצת על העמותה</Typography>
             <form onSubmit={handleSubmit} style={styles.form}>
                 <Box sx={styles.formWrapper}>
-                    <TextField
+                    <StandardInput
+                        type="string"
                         required
                         sx={styles.nameInput}
                         label="שם העמותה"
-                        variant="outlined"
-                        {...register("name")}
+                        register={register}
+                        id='name'
                     />
-                    <TextField
+                    <StandardInput
                         required
+                        type="number"
                         sx={styles.nameInput}
                         label="מספר אירגון"
-                        variant="outlined"
-                        {...register("organizationalNum")}
+                        register={register}
+                        id='organizationalNum'
                     />
-                    <TextField
+                    <StandardInput
+                        type="string"
                         required
                         sx={styles.nameInput}
                         label="תחום עיסוק העמותה"
-                        variant="outlined"
-                        {...register("areaOfOperation")}
+                        register={register}
+                        id='areaOfOperation'
                     />
-                    <TextField
+                    <StandardInput
+                        type="string"
                         sx={styles.textArea}
                         multiline
                         rows={4}
                         label="כמה מילים על העמותה..."
-                        variant="outlined"
-                        {...register("description")}
+                        register={register}
+                        id='description'
                     />
                 </Box>
                 <Button
                     type="submit"
                     size="large"
+                    variant="contained"
+                    disableElevation
                     sx={{
                         height: theme.sizes.inputHeight,
                         ...styles.button,
                     }}
-                    variant="contained"
-                    disableElevation
                 >
                     המשך
                 </Button>

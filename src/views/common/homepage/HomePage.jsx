@@ -25,7 +25,7 @@ const styles = {
         backgroundColor: 'black'
     },
     container: {
-        p: 0,
+        padding: 0,
         m: 0
     }
 }
@@ -63,7 +63,7 @@ export const HomePage = () => {
 
     const theme = useTheme()
 
-    const navbarItems = [
+    const headerItems = [
         { label: 'בית', icon: <HomeOutlinedIcon /> },
         { label: 'הרצאות', icon: <FormatListBulletedOutlinedIcon /> },
         { label: 'מפגשים', icon: <CalendarMonthOutlinedIcon /> },
@@ -87,7 +87,7 @@ export const HomePage = () => {
             <Box
                 sx={{
                     px: theme.layout.padding,
-                    py: 2
+                    paddingY: 2
                 }}>
                 <Tabs value={component} onChange={handleComponentChange} TabIndicatorProps={{ style: styles.tabIndicator }}>
                     <Tab label="הרצאות" sx={styles.tab} />
@@ -100,7 +100,7 @@ export const HomePage = () => {
                 }}>
                 {componentToRender}
             </Box>
-            <NavBar items={navbarItems} guestItems={guestNavBarItems} />
+            <NavBar items={headerItems} guestItems={guestNavBarItems} />
         </Box>
     );
 };

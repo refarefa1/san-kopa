@@ -14,7 +14,7 @@ const styles = {
     stroke: "#fff",
     fontSize: 68,
   },
-  p: {
+  padding: {
     display: "block",
     fontSize: 20,
     fontWeight: 400,
@@ -27,7 +27,7 @@ const styles = {
     justifyContent: "center",
     width: 130,
     height: 140,
-    p: 0,
+    padding: 0,
   },
 };
 export const IdentificationToggleBtn = (props) => {

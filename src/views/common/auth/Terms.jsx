@@ -10,8 +10,8 @@ const styles = {
         marginX: 'auto',
     },
     button: {
-        mt: 'auto',
-        mb: 4
+        marginTop: 'auto',
+        marginBottom: 4
     },
     terms: {
         lineHeight: 1.4

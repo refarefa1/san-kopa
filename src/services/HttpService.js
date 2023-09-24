@@ -15,7 +15,7 @@ async function get(entityType, entityId) {
 
 async function post(entityType, newEntity) {
     newEntity = JSON.parse(JSON.stringify(newEntity))
-    newEntity._id = UtilService.makeId()
+    newEntity._id = UtilService.generateId()
     return query(entityType).then(entities => {
         entities.push(newEntity)
         _save(entityType, entities)

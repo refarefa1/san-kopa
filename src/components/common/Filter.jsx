@@ -15,7 +15,7 @@ const styles = {
         width: '100%'
     },
     locationSelect: {
-        my: 2,
+        marginY: 2,
         width: '100%',
         "& .MuiOutlinedInput-root": {
             paddingLeft: "28px",
@@ -49,7 +49,7 @@ const LocationSelect = (props) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleToggleOpen = () => {
-        setIsOpen((prevIsOpen) => !prevIsOpen);
+        setIsOpen(prevIsOpen => !prevIsOpen);
     };
 
     const renderLocationOption = (props, option, { selected }) => (
@@ -151,7 +151,7 @@ export const Filter = () => {
     }
 
     return (
-        <Box sx={{ mb: 2 }}>
+        <Box sx={{ marginBottom: 2 }}>
             <TopicSelect topics={topics} selectedTopic={selectedTopic} handleTopicSelect={handleTopicSelect} />
             <LocationSelect locations={locations} selectedLocations={selectedLocations} onLocationSelect={handleLocationSelect} />
         </Box>

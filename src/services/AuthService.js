@@ -5,23 +5,24 @@ const USERS_KEY = "usersDB";
 
 const login = async (userCred) => {
   const users = await HttpService.query(USERS_KEY);
-  const user = users.find((user) => user.email === userCred.email)
-  return { ...user, rememberMe: userCred.rememberMe }
+  const user = users.find((user) => user.email === userCred.email);
+  delete user.password;
+  return user;
 };
 
 const getEmptyUser = () => {
   return {
-    id: UtilService.makeId(),
+    id: UtilService.generateId(),
     type: null,
     email: '',
     password: '',
     isRememberMe: false,
     firstName: '',
     lastName: '',
-    about: '',
+    description: '',
     avatar: null
-  }
-}
+  };
+};
 
 const _createUsers = () => {
   const users = [
@@ -29,13 +30,13 @@ const _createUsers = () => {
       _id: "user101",
       email: "lala@gmail.com",
       password: "lala",
-      rememberMe: true,
+      isRememberMe: true,
     },
     {
       _id: "user102",
       email: "puki@gmail.com",
       password: "puki",
-      rememberMe: true,
+      isRememberMe: true,
     },
   ];
   const currUsers = localStorage.getItem(USERS_KEY);

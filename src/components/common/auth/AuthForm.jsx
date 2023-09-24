@@ -1,13 +1,13 @@
-import { Box, Button, Checkbox, Divider, FormControlLabel, FormHelperText, TextField, useTheme } from "@mui/material";
+import { Box, Button, Divider, useTheme } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormRegister } from "../../../hooks/useFormRegister";
 import { GoogleButton } from "./googleButton";
 import { useDispatch } from "react-redux";
-import { login } from "../../../store/actions/AuthActions";
+import { StandardInput } from "../inputs/StandardInput";
 
 const styles = {
   textInput: {
-    mt: 2.5,
+    marginTop: 2.5,
     width: "100%",
 
     "& .muirtl-9ddj71-MuiInputBase-root-MuiOutlinedInput-root": {
@@ -21,13 +21,13 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    mt: 3.25,
+    marginTop: 3.25,
   },
   submitButton: {
     width: "100%",
     fontSize: 20,
-    py: 1.5,
-    mt: 'auto',
+    paddingY: 1.5,
+    marginTop: 'auto',
     borderRadius: 2,
   },
   link: {
@@ -37,63 +37,44 @@ const styles = {
 };
 
 export const AuthForm = (props) => {
+  const { handleChange, type, formSx, authData } = props;
 
-  const {
-    handleChange,
-    type,
-    formSx,
-    authData
-  } = props
+  const theme = useTheme();
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const theme = useTheme()
-
-  const { email, password, isRememberMe } = authData
-
-  const initialFields = {
-    email,
-    password,
-    isRememberMe
-  };
-
-  const [register, setUserCred, userCred] = useFormRegister(initialFields);
+  const [register, setUserCred, userCred] = useFormRegister(authData);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    if (type === 'login') {
-      dispatch(login(userCred))
-      navigate('/')
-    }
-    else {
-      // dispatch(signup(userCred))
-      handleChange({ data: { ...userCred }, newComponent: 1 })
-    }
+    const isLogin = type === 'login';
+    handleChange(userCred, isLogin);
   };
 
   return (
     <form onSubmit={handleSubmit} style={{ ...formSx }}>
       <GoogleButton />
-      <Divider sx={{ mt: 4, mb: 1.25 }}>או</Divider>
-      <TextField
-        {...register(`email`, `email`)}
-        label="אימייל"
-        variant="outlined"
+      <Divider sx={{ marginTop: 4, marginBottom: 1.25 }}>או</Divider>
+      <StandardInput
         type="email"
+        label="אימייל"
         autoComplete="email"
         sx={styles.textInput}
+        register={register}
+        id='email'
       />
-      <TextField
-        {...register(`password`, `password`)}
+      <StandardInput
+        type="string"
         label="סיסמה"
-        variant="outlined"
         sx={styles.textInput}
         helperText={type === 'signup' ? 'על הסיסמה להכיל 8 תוים לפחות' : ''}
+        register={register}
+        id='password'
       />
       <Box sx={styles.rememberMePswRecoverWrapper}>
-        <FormControlLabel
-          control={<Checkbox {...register(`rememberMe`, `checkbox`)} defaultChecked />}
+        <StandardInput
+          type="checkbox"
           label="זכור אותי"
+          register={register}
+          id="isRememberMe"
         />
         {type === "login" && (
           <Link to="/password-recovery" style={styles.link}>
@@ -107,8 +88,7 @@ export const AuthForm = (props) => {
         sx={{
           height: theme.sizes.inputHeight,
           ...styles.submitButton
-        }}
-      >
+        }}>
         התחברות
       </Button>
     </form>

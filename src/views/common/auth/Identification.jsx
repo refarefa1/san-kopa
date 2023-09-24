@@ -9,22 +9,22 @@ const styles = {
     flexDirection: "column",
     flexGrow: 1,
   },
-  p: {
+  padding: {
     display: "block",
     fontSize: 20,
     fontWeight: 400,
   },
   paperWrapper: {
     width: "fit-content",
-    mx: "auto",
-    mt: 2,
+    marginX: "auto",
+    marginTop: 2,
   },
   continueButton: {
     width: "100%",
     fontSize: 20,
-    py: 1.5,
-    mt: "auto",
-    mb: 4,
+    paddingY: 1.5,
+    marginTop: "auto",
+    marginBottom: 4,
     borderRadius: 2,
   },
 };
@@ -32,33 +32,30 @@ const styles = {
 export const Identification = () => {
 
   const context = useOutletContext();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const {
-    handleChange,
-    authData
-  } = context
+  const { handleChange, authData } = context;
 
   const theme = useTheme();
 
   const [userType, setUserType] = useState(authData.userType);
 
   const handleClick = () => {
-    handleChange({ data: { userType } });
-    navigate(`/signup/${userType}`)
+    handleChange({ userType });
+    navigate(`/signup/${userType}`);
   };
 
 
   return (
     <Box sx={styles.container}>
       <>
-        <Typography variant="p" sx={{ ...styles.p, mt: 2 }}>
+        <Typography variant="p" sx={{ ...styles.p, marginTop: 2 }}>
           איזה כיף שהתחלת בתהליך ההרשמה!
         </Typography>
         <Typography variant="p" sx={styles.p}>
           זה יקח רק כמה דקות
         </Typography>
-        <Typography variant="h6" sx={{ mt: 2 }}>
+        <Typography variant="h6" sx={{ marginTop: 2 }}>
           באת לכאן בתור?
         </Typography>
         <Box sx={styles.paperWrapper}>
@@ -66,10 +63,7 @@ export const Identification = () => {
         </Box>
         <Button
           variant="contained"
-          sx={{
-            height: theme.sizes.inputHeight,
-            ...styles.continueButton,
-          }}
+          sx={{ height: theme.sizes.inputHeight, ...styles.continueButton }}
           onClick={handleClick}
         >
           המשך

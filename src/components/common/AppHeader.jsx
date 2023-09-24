@@ -19,7 +19,7 @@ const styles = {
   loginBtn: {
     borderRadius: 4,
     px: 2,
-    py: 1,
+    paddingY: 1,
   },
 };
 
