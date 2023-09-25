@@ -11,6 +11,7 @@ import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import { loadLectures } from "../../../store/actions/LectureActions";
 import { AppHeader } from "../../../components/common/AppHeader";
+import { useTranslation } from "react-i18next";
 
 const styles = {
     tab: {
@@ -28,17 +29,17 @@ const styles = {
         padding: 0,
         m: 0
     }
-}
+};
 
 const LecturePage = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(loadLectures())
-    }, [])
+        dispatch(loadLectures());
+    }, []);
 
-    const lectures = useSelector(state => state.lectureModule.lectures)
+    const lectures = useSelector(state => state.lectureModule.lectures);
 
     return (
         <Container sx={styles.container}>
@@ -61,25 +62,26 @@ export const HomePage = () => {
 
     const [component, setComponent] = useState(0);
 
-    const theme = useTheme()
+    const theme = useTheme();
+    const { t } = useTranslation();
 
     const headerItems = [
-        { label: 'בית', icon: <HomeOutlinedIcon /> },
-        { label: 'הרצאות', icon: <FormatListBulletedOutlinedIcon /> },
-        { label: 'מפגשים', icon: <CalendarMonthOutlinedIcon /> },
-        { label: 'הודעות', icon: <ChatBubbleOutlineOutlinedIcon /> }
-    ]
+        { label: t('Navbar:home'), icon: <HomeOutlinedIcon /> },
+        { label: t('Models:lectures'), icon: <FormatListBulletedOutlinedIcon /> },
+        { label: t('Navbar:appointments'), icon: <CalendarMonthOutlinedIcon /> },
+        { label: t('Navbar:messages'), icon: <ChatBubbleOutlineOutlinedIcon /> }
+    ];
 
     const guestNavBarItems = [
-        { label: 'מי אנחנו?' },
-        { label: 'צור קשר' },
-    ]
+        { label: t('Navbar:whoAreWe') },
+        { label: t('Navbar:contact') },
+    ];
 
     const handleComponentChange = (event, newComponent) => {
         setComponent(newComponent);
     };
 
-    const componentToRender = component === 0 ? <LecturePage /> : <InstructorPage />
+    const componentToRender = component === 0 ? <LecturePage /> : <InstructorPage />;
 
     return (
         <Box sx={{ pb: 10 }}>
@@ -90,8 +92,8 @@ export const HomePage = () => {
                     paddingY: 2
                 }}>
                 <Tabs value={component} onChange={handleComponentChange} TabIndicatorProps={{ style: styles.tabIndicator }}>
-                    <Tab label="הרצאות" sx={styles.tab} />
-                    <Tab label="מרצים" sx={styles.tab} />
+                    <Tab label={t('Models:lectures')} sx={styles.tab} />
+                    <Tab label={t('Models:instructors')} sx={styles.tab} />
                 </Tabs>
             </Box>
             <Box

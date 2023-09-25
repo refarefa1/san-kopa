@@ -5,6 +5,7 @@ import { GoogleButton } from "./googleButton";
 import { useDispatch } from "react-redux";
 import { StandardInput } from "../inputs/StandardInput";
 import { InputTypes } from "../../../types/inputs";
+import { useTranslation } from "react-i18next";
 
 const styles = {
   textInput: {
@@ -41,6 +42,7 @@ export const AuthForm = (props) => {
   const { handleChange, type, formSx, authData } = props;
 
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const [register, setUserCred, userCred] = useFormRegister(authData);
 
@@ -56,7 +58,7 @@ export const AuthForm = (props) => {
       <Divider sx={{ marginTop: 4, marginBottom: 1.25 }}>או</Divider>
       <StandardInput
         type={InputTypes.EMAIL}
-        label="אימייל"
+        label={t('Auth:email')}
         autoComplete="email"
         sx={styles.textInput}
         register={register}
@@ -64,22 +66,22 @@ export const AuthForm = (props) => {
       />
       <StandardInput
         type={InputTypes.PASSWORD}
-        label="סיסמה"
+        label={t('Auth:password')}
         sx={styles.textInput}
-        helperText={type === 'signup' ? 'על הסיסמה להכיל 8 תוים לפחות' : ''}
+        helperText={type === 'signup' ? t('Auth:passwordHelperText') : ''}
         register={register}
         id='password'
       />
       <Box sx={styles.rememberMePswRecoverWrapper}>
         <StandardInput
           type={InputTypes.CHECKBOX}
-          label="זכור אותי"
+          label={t('Auth:rememberMe')}
           register={register}
           id="isRememberMe"
         />
         {type === "login" && (
           <Link to="/password-recovery" style={styles.link}>
-            שכחת סיסמה?
+            {t('Auth:forgotPassword')}
           </Link>
         )}
       </Box>
@@ -90,7 +92,7 @@ export const AuthForm = (props) => {
           height: theme.sizes.inputHeight,
           ...styles.submitButton
         }}>
-        התחברות
+        {type === 'login' ? t('System:connect') : t('System:signup')}
       </Button>
     </form>
   );

@@ -5,6 +5,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import { useTranslation } from "react-i18next";
 
 const styles = {
     topicSelectInput: {
@@ -42,10 +43,10 @@ const styles = {
         transform: 'translateY(-50%)',
         color: 'gray'
     }
-}
+};
 
 const LocationSelect = (props) => {
-    const { locations, selectedLocations, onLocationSelect } = props
+    const { locations, selectedLocations, onLocationSelect } = props;
     const [isOpen, setIsOpen] = useState(false);
 
     const handleToggleOpen = () => {
@@ -106,11 +107,13 @@ const LocationSelect = (props) => {
 };
 
 const TopicSelect = (props) => {
-    const { topics, selectedTopic, handleTopicSelect } = props
+    const { topics, selectedTopic, handleTopicSelect } = props;
+
+    const { t } = useTranslation();
 
     const renderAutocompleteInput = (params) => (
         <TextField
-            placeholder="אילו נושאים מעניינים אותך?"
+            placeholder={t('Filter:callToAction')}
             {...params}
             InputProps={{
                 sx: { ...styles.topicSelectInput },
@@ -132,8 +135,8 @@ const TopicSelect = (props) => {
                 renderInput={renderAutocompleteInput}
             />
         </Stack>
-    )
-}
+    );
+};
 
 export const Filter = () => {
     const topics = ['אומנות', 'יצירתיות', 'העצמה', 'מוטיבציה', 'בריאות', 'כישורי חיים'];
@@ -148,7 +151,7 @@ export const Filter = () => {
 
     const handleTopicSelect = (event, selectedOption) => {
         setSelectedTopic(selectedOption);
-    }
+    };
 
     return (
         <Box sx={{ marginBottom: 2 }}>

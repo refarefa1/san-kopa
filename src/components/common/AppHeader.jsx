@@ -7,6 +7,7 @@ import { Logo } from "../../svgs/Logo";
 import { BackArrow } from "../../svgs/BackArrow";
 import { useState } from "react";
 import { ProfileImgPlaceholder } from "../../svgs/ProfileImgPlaceholder";
+import { useTranslation } from "react-i18next";
 
 const styles = {
   header: {
@@ -24,7 +25,9 @@ const styles = {
 };
 
 export const AppHeader = (props) => {
-  const { onBack } = props
+  const { onBack } = props;
+
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -65,7 +68,7 @@ export const AppHeader = (props) => {
           onClick={handleClick}
           variant="outlined"
         >
-          כניסה
+          {t('System:enter')}
         </Button>
       )}
 

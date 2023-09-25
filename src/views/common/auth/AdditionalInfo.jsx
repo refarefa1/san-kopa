@@ -3,6 +3,7 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import { useFormRegister } from "../../../hooks/useFormRegister";
 import { StandardInput } from '../../../components/common/inputs/StandardInput';
 import { InputTypes } from "../../../types/inputs";
+import { useTranslation } from "react-i18next";
 
 const styles = {
     container: {
@@ -51,6 +52,7 @@ export const AdditionalInfo = () => {
     const navigate = useNavigate();
 
     const theme = useTheme();
+    const { t } = useTranslation();
 
     const { name = '', organizationalNum = 0, areaOfOperation = '', description = '' } = authData;
 
@@ -72,7 +74,7 @@ export const AdditionalInfo = () => {
                         type={InputTypes.STRING}
                         required
                         sx={styles.nameInput}
-                        label="שם העמותה"
+                        label={t('Auth:organizationName')}
                         register={register}
                         id='name'
                     />
@@ -80,7 +82,7 @@ export const AdditionalInfo = () => {
                         type={InputTypes.NUMBER}
                         required
                         sx={styles.nameInput}
-                        label="מספר אירגון"
+                        label={t('Auth:organizationalNum')}
                         register={register}
                         id='organizationalNum'
                     />
@@ -88,7 +90,7 @@ export const AdditionalInfo = () => {
                         type={InputTypes.STRING}
                         required
                         sx={styles.nameInput}
-                        label="תחום עיסוק העמותה"
+                        label={t('Auth:areaOfOperation')}
                         register={register}
                         id='areaOfOperation'
                     />
@@ -97,7 +99,7 @@ export const AdditionalInfo = () => {
                         sx={styles.textArea}
                         multiline
                         rows={4}
-                        label="כמה מילים על העמותה..."
+                        label={t('Auth:organizationDescription')}
                         register={register}
                         id='description'
                     />
@@ -112,7 +114,7 @@ export const AdditionalInfo = () => {
                         ...styles.button,
                     }}
                 >
-                    המשך
+                    {t('System:continue')}
                 </Button>
             </form>
         </Box>

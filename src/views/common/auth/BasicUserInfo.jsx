@@ -5,6 +5,7 @@ import { useFormRegister } from '../../../hooks/useFormRegister';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { StandardInput } from '../../../components/common/inputs/StandardInput';
 import { InputTypes } from '../../../types/inputs';
+import { useTranslation } from 'react-i18next';
 
 const styles = {
   container: {
@@ -85,6 +86,7 @@ export const BasicUserInfo = () => {
   const { handleChange, authData } = context;
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const theme = useTheme();
 
   const [register, setUserInfo, userInfo] = useFormRegister(authData);
@@ -110,7 +112,7 @@ export const BasicUserInfo = () => {
 
   return (
     <Box sx={styles.container}>
-      <Typography sx={styles.title}>עכשיו בשביל להכיר אותך קצת יותר...</Typography>
+      <Typography sx={styles.title}>{t('Auth:knowYouBetter')}</Typography>
       <Box sx={{ border: `2px solid ${theme.palette.primary.main}`, ...styles.fileInputContainer }}>
         <Input type='file' sx={styles.fileInput} onChange={handleUpload} />
         <Box sx={styles.cameraIconContainer}>
@@ -124,7 +126,7 @@ export const BasicUserInfo = () => {
             type={InputTypes.STRING}
             required
             sx={styles.nameInput}
-            label='שם פרטי'
+            label={t('Auth:firstName')}
             register={register}
             id='firstName'
           />
@@ -132,7 +134,7 @@ export const BasicUserInfo = () => {
             type={InputTypes.STRING}
             required
             sx={styles.nameInput}
-            label='שם משפחה'
+            label={t('Auth:lastName')}
             register={register}
             id='lastName'
           />
@@ -141,22 +143,22 @@ export const BasicUserInfo = () => {
             sx={styles.textArea}
             multiline
             rows={4}
-            label='כמה מילים עליך ועל ההרצאות שלך...'
+            label={t('Auth:lectureDescription')}
             register={register}
             id='about'
           />
         </Box>
         <Button
-          type='submit'
-          size='large'
           sx={{
             height: theme.sizes.inputHeight,
             ...styles.button,
           }}
+          type='submit'
+          size='large'
           variant='contained'
           disableElevation
         >
-          המשך
+          {t('System:continue')}
         </Button>
       </form>
     </Box>

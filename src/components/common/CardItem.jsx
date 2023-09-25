@@ -1,4 +1,4 @@
-import { Box, ButtonBase, CardMedia, Chip, Grid, ListItem, Typography } from "@mui/material"
+import { Box, ButtonBase, CardMedia, Chip, Grid, ListItem, Typography } from "@mui/material";
 
 const styles = {
     item: {
@@ -29,11 +29,11 @@ const styles = {
         alignItems: 'space-between',
         width: '100%'
     }
-}
+};
 
 export const CardItem = (props) => {
 
-    const { item } = props
+    const { item } = props;
 
     return (
         <ListItem sx={styles.item}>
@@ -48,11 +48,11 @@ export const CardItem = (props) => {
                     <Typography>{item.lecturer.name}</Typography>
                     <Box sx={{ marginTop: 'auto' }}>
                         {item.fields.map((field, idx) =>
-                            <Chip sx={{ mr: '12px' }} size="small" key={idx} label={field} />
+                            <Chip sx={{ marginRight: '12px' }} size="small" key={idx} label={field} />
                         )}
                     </Box>
                 </Grid>
             </Grid>
         </ListItem>
-    )
-}
+    );
+};

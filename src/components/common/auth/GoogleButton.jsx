@@ -1,12 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, } from "react";
+import { useTranslation } from "react-i18next";
 
 const styles = {
   googleBtn: {
     marginBlockStart: 40,
   },
-}
+};
 export const GoogleButton = () => {
   const googleSigninRef = useRef();
+
+  const { t } = useTranslation();
 
   const handleCallbackResponse = (response) => {
     console.log(response);
@@ -24,7 +27,7 @@ export const GoogleButton = () => {
     google.accounts.id.renderButton(googleSigninRef.current, {
       theme: "outline",
       width: "100%",
-      text: "התחברות עם גוגל",
+      text: t('connectWithGoogle'),
       locale: "he-IL"
     });
 
@@ -36,5 +39,5 @@ export const GoogleButton = () => {
       style={styles.googleBtn}
     >
     </div>
-  )
-}
+  );
+};

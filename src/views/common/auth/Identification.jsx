@@ -2,6 +2,7 @@ import { Box, Button, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 import { IdentificationToggleBtn } from "../../../components/common/auth/IdentificationToggleBtn";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const styles = {
   container: {
@@ -34,6 +35,8 @@ export const Identification = () => {
   const context = useOutletContext();
   const navigate = useNavigate();
 
+  const { t } = useTranslation();
+
   const { handleChange, authData } = context;
 
   const theme = useTheme();
@@ -50,13 +53,13 @@ export const Identification = () => {
     <Box sx={styles.container}>
       <>
         <Typography variant="p" sx={{ ...styles.p, marginTop: 2 }}>
-          איזה כיף שהתחלת בתהליך ההרשמה!
+          {t('Auth:greet')}
         </Typography>
         <Typography variant="p" sx={styles.p}>
-          זה יקח רק כמה דקות
+          {t('Auth:greetExtra')}
         </Typography>
         <Typography variant="h6" sx={{ marginTop: 2 }}>
-          באת לכאן בתור?
+          {t('Auth:identification')}
         </Typography>
         <Box sx={styles.paperWrapper}>
           <IdentificationToggleBtn userType={userType} setUserType={setUserType} />
@@ -66,7 +69,7 @@ export const Identification = () => {
           sx={{ height: theme.sizes.inputHeight, ...styles.continueButton }}
           onClick={handleClick}
         >
-          המשך
+          {t('System:continue')}
         </Button>
       </>
     </Box>

@@ -6,3 +6,8 @@ export const cacheRtl = createCache({
   key: "muirtl",
   stylisPlugins: [prefixer, rtlPlugin],
 });
+
+export const cacheLtr = createCache({
+  key: "muiltr",
+  stylisPlugins: [prefixer],
+});

@@ -4,6 +4,7 @@ import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Typography, useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const styles = {
   btnsWrapper: {
@@ -33,6 +34,8 @@ const styles = {
 export const IdentificationToggleBtn = (props) => {
   const { userType, setUserType } = props;
   const theme = useTheme();
+  const { t } = useTranslation();
+
 
   const handleChange = (ev, newUserType) => {
     setUserType(newUserType);
@@ -45,8 +48,8 @@ export const IdentificationToggleBtn = (props) => {
       sx={{ border: `solid 1px ${theme.palette.primary.main} !important`, ...styles.toggleButton }}
     >
       <LocalFloristOutlinedIcon sx={{ fill: theme.palette.primary.main, ...styles.icon }} />
-      <Typography variant="p" sx={{color: theme.palette.primary.main, ...styles.p}}>
-        עמותה
+      <Typography variant="p" sx={{ color: theme.palette.primary.main, ...styles.p }}>
+        {t('Models:organization')}
       </Typography>{" "}
     </ToggleButton>,
     <ToggleButton
@@ -55,8 +58,8 @@ export const IdentificationToggleBtn = (props) => {
       sx={{ border: `solid 1px ${theme.palette.primary.main} !important`, ...styles.toggleButton }}
     >
       <PermIdentityOutlinedIcon sx={{ fill: theme.palette.primary.main, ...styles.icon }} />
-      <Typography variant="p" sx={{color: theme.palette.primary.main, ...styles.p}}>
-        מרצה
+      <Typography variant="p" sx={{ color: theme.palette.primary.main, ...styles.p }}>
+        {t('Models:instructor')}
       </Typography>{" "}
     </ToggleButton>,
   ];
